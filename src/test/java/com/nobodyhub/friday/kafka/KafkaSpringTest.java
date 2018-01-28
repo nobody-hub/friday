@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
 
+import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_TOPIC;
+
 
 /**
  * @author Ryan
@@ -24,7 +26,7 @@ public class KafkaSpringTest {
 
     @Test
     public void testSimple() {
-        template.send("friday.links", 0, "yan" + (new Date()).getTime());
+        template.send(CRAWLER_TOPIC, 0, "yan" + (new Date()).getTime());
         template.flush();
     }
 }

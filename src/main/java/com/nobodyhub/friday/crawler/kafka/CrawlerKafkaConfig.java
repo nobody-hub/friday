@@ -16,6 +16,8 @@ import org.springframework.kafka.core.*;
 
 import java.util.Map;
 
+import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_GROUP_ID;
+
 /**
  * @author Ryan
  * @since 28/01/2018
@@ -39,7 +41,7 @@ public class CrawlerKafkaConfig {
     private Map<String, Object> consumerConfigs() {
         Map<String, Object> configs = Maps.newHashMap();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "friday.crawler");
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, CRAWLER_GROUP_ID);
         configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         configs.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 100);
         configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 15000);
