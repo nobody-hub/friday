@@ -1,7 +1,11 @@
 package com.nobodyhub.friday.crawler.kafka;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.IntegerSerializer;
@@ -15,6 +19,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 
 import java.util.Map;
+import java.util.Properties;
 
 import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_GROUP_ID;
 
@@ -70,5 +75,26 @@ public class CrawlerKafkaConfig {
     @Bean
     public KafkaTemplate<Integer, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
+    public KafkaConsumer<Integer, String> consumer() {
+        final Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, CrawlerKafkaConst.CRAWLER_GROUP_ID);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        final KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Lists.newArrayList(CrawlerKafkaConst.CRAWLER_TOPIC));
+        return consumer;
+    }
+
+    @Bean
+    public KafkaProducer<Integer, String> producer() {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        return new KafkaProducer<>(props);
     }
 }
