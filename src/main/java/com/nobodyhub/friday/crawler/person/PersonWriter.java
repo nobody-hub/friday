@@ -12,13 +12,13 @@ import java.util.List;
  * @since 30/01/2018
  */
 @Component
-public class PersonWriter implements ItemWriter<Person> {
+public class PersonWriter implements ItemWriter<Object> {
     private static final Logger logger = LoggerFactory.getLogger(PersonWriter.class);
 
     @Override
-    public void write(List<? extends Person> items) throws Exception {
+    public void write(List<? extends Object> items) throws Exception {
         logger.info("writing records... " + items.size() + "records");
-        for(Person person: items) {
+        for(Object person: items) {
             logger.info("writing..."+person);
         }
     }

@@ -32,8 +32,11 @@ public class PersonReader implements ItemReader<Person> {
         Person person = null;
         if (idx != fakeData.size() - 1) {
             person = new Person(fakeData.get(idx), fakeData.get(idx + 1));
+            idx++;
+        } else {
+            idx = 0;
         }
-        idx++;
+
         return person;
     }
 }
