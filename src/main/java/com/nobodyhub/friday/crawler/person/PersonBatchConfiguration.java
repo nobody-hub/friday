@@ -30,12 +30,17 @@ public class PersonBatchConfiguration /*extends SimpleBatchConfiguration impleme
     protected StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job importUserJob(JobCompletionNotificationListener listener, @Qualifier("step1") Step step1, @Qualifier("step2") Step step2) {
+    public Job importUserJob(
+            JobCompletionNotificationListener listener,
+            @Qualifier("step1") Step step1,
+            @Qualifier("step2") Step step2,
+            @Qualifier("step3") Step step3) {
         return jobBuilderFactory.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .start(step1)
                 .next(step2)
+                .next(step3)
                 .build();
     }
 
@@ -61,6 +66,15 @@ public class PersonBatchConfiguration /*extends SimpleBatchConfiguration impleme
                 .writer(writer)
                 .build();
     }
+
+    @Bean("step3")
+    public Step step3(PersonTasklet tasklet) {
+        return stepBuilderFactory.get("step3")
+                .tasklet(tasklet)
+                .build();
+    }
+
+
 //
 //    @Bean
 //    @Override
