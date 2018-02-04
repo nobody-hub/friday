@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 @Component
 public class PersonReader implements ItemReader<Person> {
     private List<String> fakeData = Lists.newArrayList();
-    private int idx = 0;
+    private AtomicInteger idx = new AtomicInteger(0);
 
     @PostConstruct
     protected void init() {
@@ -30,11 +31,11 @@ public class PersonReader implements ItemReader<Person> {
     @Override
     public Person read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
         Person person = null;
-        if (idx != fakeData.size() - 1) {
-            person = new Person(fakeData.get(idx), fakeData.get(idx + 1));
-            idx++;
+        if (idx.get() != fakeData.size() - 1) {
+            person = new Person(fakeData.get(idx.get()), fakeData.get(idx.get() + 1));
+            idx.incrementAndGet();
         } else {
-            idx = 0;
+            idx.set(0);
         }
 
         return person;
