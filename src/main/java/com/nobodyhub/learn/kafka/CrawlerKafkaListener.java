@@ -1,10 +1,10 @@
-package com.nobodyhub.friday.crawler.kafka;
+package com.nobodyhub.learn.kafka;
 
 import org.apache.log4j.Logger;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_TOPIC;
+import static com.nobodyhub.learn.kafka.CrawlerKafkaConst.CRAWLER_TOPIC;
 
 /**
  * @author Ryan

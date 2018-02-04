@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.person;
+package com.nobodyhub.learn.person;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

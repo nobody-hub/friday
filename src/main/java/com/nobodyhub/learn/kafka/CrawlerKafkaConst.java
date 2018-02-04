@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.kafka;
+package com.nobodyhub.learn.kafka;
 
 /**
  * @author Ryan

@@ -1,5 +1,7 @@
 package com.nobodyhub.friday.crawler.kafka;
 
+import com.nobodyhub.learn.kafka.CrawlerKafkaConfig;
+import com.nobodyhub.learn.kafka.CrawlerKafkaConst;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;

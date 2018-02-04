@@ -1,8 +1,7 @@
-package com.nobodyhub.friday.crawler.kafka;
+package com.nobodyhub.learn.kafka;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -20,8 +19,6 @@ import org.springframework.kafka.core.*;
 
 import java.util.Map;
 import java.util.Properties;
-
-import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_GROUP_ID;
 
 /**
  * @author Ryan
@@ -46,7 +43,7 @@ public class CrawlerKafkaConfig {
     private Map<String, Object> consumerConfigs() {
         Map<String, Object> configs = Maps.newHashMap();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        configs.put(ConsumerConfig.GROUP_ID_CONFIG, CRAWLER_GROUP_ID);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, CrawlerKafkaConst.CRAWLER_GROUP_ID);
         configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         configs.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 100);
         configs.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 15000);

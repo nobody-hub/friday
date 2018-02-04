@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.person;
+package com.nobodyhub.learn.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.person;
+package com.nobodyhub.learn.person;
 
 import com.google.common.collect.Lists;
 import org.springframework.batch.item.ItemReader;

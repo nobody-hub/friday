@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.person;
+package com.nobodyhub.learn.person;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

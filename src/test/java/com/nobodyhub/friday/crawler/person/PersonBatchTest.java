@@ -1,5 +1,6 @@
 package com.nobodyhub.friday.crawler.person;
 
+import com.nobodyhub.learn.person.PersonBatchConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

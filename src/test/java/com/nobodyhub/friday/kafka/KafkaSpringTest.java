@@ -1,6 +1,6 @@
 package com.nobodyhub.friday.kafka;
 
-import com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConfig;
+import com.nobodyhub.learn.kafka.CrawlerKafkaConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
 
-import static com.nobodyhub.friday.crawler.kafka.CrawlerKafkaConst.CRAWLER_TOPIC;
+import static com.nobodyhub.learn.kafka.CrawlerKafkaConst.CRAWLER_TOPIC;
 
 
 /**
