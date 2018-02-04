@@ -2,6 +2,7 @@ package com.nobodyhub.friday.crawler.person;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -39,14 +40,16 @@ public class PersonBatchConfiguration /*extends SimpleBatchConfiguration impleme
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .start(step1)
-                .next(step2)
-                .next(step3)
+                .on("*Skip*").to(step2)
+                .from(step1).on("*").to(step3)
+                .end()
                 .build();
     }
 
     @Bean("step1")
-    public Step step1(ItemReader<Person> reader, @Qualifier("processor1") ItemProcessor<Person, Person> processor, ItemWriter<Object> writer) {
+    public Step step1(ItemReader<Person> reader, @Qualifier("processor1") ItemProcessor<Person, Person> processor, ItemWriter<Object> writer, StepExecutionListener listener) {
         return stepBuilderFactory.get("step1")
+                .listener(listener)
                 .<Person, Person>chunk(1)
                 .reader(reader)
                 .processor(processor)
