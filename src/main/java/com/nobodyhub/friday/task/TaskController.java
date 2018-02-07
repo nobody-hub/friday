@@ -1,8 +1,12 @@
 package com.nobodyhub.friday.task;
 
+import com.nobodyhub.friday.crawler.kafka.CrawlerLinkMessager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.JobOperator;
@@ -14,10 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
-
-import static org.springframework.batch.core.BatchStatus.COMPLETED;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -40,22 +42,13 @@ public class TaskController {
     @Autowired
     private Job crawlerJob;
 
+    @Autowired
+    private CrawlerLinkMessager messager;
+
     @RequestMapping("/start")
-    public String start() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, NoSuchJobException {
+    public String start() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, NoSuchJobException, ExecutionException, InterruptedException {
+        messager.send("100");
         jobLauncher.run(crawlerJob, createJobParameters());
-        jobLauncher.run(crawlerJob, createJobParameters());
-        JobExecution execution = jobLauncher.run(crawlerJob, createJobParameters());
-        while (!COMPLETED.equals(execution.getStatus())) {
-            for (JobInstance instance : jobExplorer.getJobInstances("friday.crawler", 0, 100)) {
-                List<JobExecution> execs = jobExplorer.getJobExecutions(instance);
-                logger.info("\tInstance[{}:{}] has {} executions, which are:",
-                        instance.getInstanceId(),
-                        instance.getJobName());
-                for (JobExecution exec : execs) {
-                    logger.info("Execution[{}:{}:{}]", exec.getJobId(), exec.getId(), exec.getStatus());
-                }
-            }
-        }
         return "Task Started";
     }
 

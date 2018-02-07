@@ -45,10 +45,13 @@ public class CrawlerBatchConfiguration extends SimpleBatchConfiguration {
             CrawlerLinkWriter crawlerLinkWriter
     ) {
         return stepBuilderFactory.get("friday.crawler.crawlerStep1")
-                .<Integer, Integer>chunk(10)
+                .<Integer, Integer>chunk(1)
                 .reader(linkReader)
                 .processor(linkProcessor)
                 .writer(crawlerLinkWriter)
+                .faultTolerant()
+                .retry(NumberFormatException.class)
+                .retryLimit(100)
                 .build();
     }
 
