@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.kafka;
+package com.nobodyhub.friday.batch.kafka;
 
 import com.google.common.collect.Maps;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

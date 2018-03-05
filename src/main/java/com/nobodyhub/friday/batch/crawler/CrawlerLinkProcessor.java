@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler;
+package com.nobodyhub.friday.batch.crawler;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

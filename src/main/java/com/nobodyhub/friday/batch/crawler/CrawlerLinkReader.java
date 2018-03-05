@@ -1,6 +1,7 @@
-package com.nobodyhub.friday.crawler;
+package com.nobodyhub.friday.batch.crawler;
 
-import com.nobodyhub.friday.crawler.kafka.CrawlerLinkMessager;
+import com.nobodyhub.friday.batch.crawler.kafka.CrawlerException;
+import com.nobodyhub.friday.batch.crawler.kafka.CrawlerLinkMessager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemReader;
@@ -25,9 +26,13 @@ public class CrawlerLinkReader implements ItemReader<Integer> {
         String value = messager.poll();
         logger.debug("Read value:[{}]", value);
         if (value != null) {
-            int val = Integer.parseInt(value);
-            if(val >2) {
-                return val;
+            try {
+                int val = Integer.parseInt(value);
+                if (val > 2) {
+                    return val;
+                }
+            } catch (NumberFormatException e) {
+                throw new CrawlerException(e.getMessage());
             }
         }
         return null;

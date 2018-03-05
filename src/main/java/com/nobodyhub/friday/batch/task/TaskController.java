@@ -1,6 +1,6 @@
-package com.nobodyhub.friday.task;
+package com.nobodyhub.friday.batch.task;
 
-import com.nobodyhub.friday.crawler.kafka.CrawlerLinkMessager;
+import com.nobodyhub.friday.batch.crawler.kafka.CrawlerLinkMessager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;

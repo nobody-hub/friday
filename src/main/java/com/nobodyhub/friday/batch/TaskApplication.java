@@ -1,4 +1,4 @@
-package com.nobodyhub.friday;
+package com.nobodyhub.friday.batch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

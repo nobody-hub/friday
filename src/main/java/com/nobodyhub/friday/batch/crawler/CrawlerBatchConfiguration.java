@@ -1,5 +1,7 @@
-package com.nobodyhub.friday.crawler;
+package com.nobodyhub.friday.batch.crawler;
 
+import com.nobodyhub.friday.batch.crawler.kafka.CrawlerException;
+import com.nobodyhub.friday.batch.crawler.kafka.CrawlerStepListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -42,16 +44,18 @@ public class CrawlerBatchConfiguration extends SimpleBatchConfiguration {
     public Step crawlerStep1(
             CrawlerLinkReader linkReader,
             CrawlerLinkProcessor linkProcessor,
-            CrawlerLinkWriter crawlerLinkWriter
+            CrawlerLinkWriter crawlerLinkWriter,
+            CrawlerStepListener listener
     ) {
         return stepBuilderFactory.get("friday.crawler.crawlerStep1")
                 .<Integer, Integer>chunk(1)
+                .faultTolerant()
+                .skipLimit(100)
+                .skip(CrawlerException.class)
                 .reader(linkReader)
                 .processor(linkProcessor)
                 .writer(crawlerLinkWriter)
-                .faultTolerant()
-                .retry(NumberFormatException.class)
-                .retryLimit(100)
+                .listener(listener)
                 .build();
     }
 
