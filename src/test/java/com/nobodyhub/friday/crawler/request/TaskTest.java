@@ -23,7 +23,7 @@ public class TaskTest {
     @Before
     public void setup() {
         this.task = createTask();
-        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrl\":[\"http://en.wikipedia.org/\"],\"links\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"request\":null}},\"targets\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"sel\":\"b a\",\"attributes\":[{\"attr\":\"href\"}]}]}}}";
+        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"request\":null}},\"targets\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"sel\":\"b a\",\"attributes\":[{\"attr\":\"href\"}]}]}}}";
         objectMapper = new ObjectMapper();
     }
 
@@ -43,7 +43,7 @@ public class TaskTest {
         task.setDescription("TaskDescription");
         task.setVersion("1.2.3");
         task.setUserAgent("Friday");
-        task.setEntranceUrl(Lists.newArrayList(
+        task.setEntranceUrls(Lists.newArrayList(
                 "http://en.wikipedia.org/"
         ));
 

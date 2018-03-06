@@ -35,7 +35,7 @@ public class Task {
     /**
      * Entrance urls of crawler
      */
-    protected List<String> entranceUrl;
+    protected List<String> entranceUrls;
     /**
      * Links that will be traced by the crawler
      * urlPattern => link
