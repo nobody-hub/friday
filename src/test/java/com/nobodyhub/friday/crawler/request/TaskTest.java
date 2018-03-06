@@ -3,14 +3,16 @@ package com.nobodyhub.friday.crawler.request;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Ryan
@@ -23,7 +25,7 @@ public class TaskTest {
     @Before
     public void setup() {
         this.task = createTask();
-        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"request\":null}},\"targets\":{\"en.wikipedia.org/wiki/.*\":{\"urlPattern\":\"en.wikipedia.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"sel\":\"b a\",\"attributes\":[{\"attr\":\"href\"}]}]}}}";
+        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"request\":null}],\"targets\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"sel\":\"b a\",\"attributes\":[{\"attr\":\"href\"}]}]}]}";
         objectMapper = new ObjectMapper();
     }
 
@@ -47,23 +49,33 @@ public class TaskTest {
                 "http://en.wikipedia.org/"
         ));
 
-        Map<String, Link> links = Maps.newHashMap();
         Link link = new Link();
-        link.setUrlPattern("en.wikipedia.org/wiki/.*");
-        links.put(link.getUrlPattern(), link);
-        task.setLinks(links);
+        link.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
+        task.setLinks(Lists.newArrayList(link));
 
-        Map<String, Target> targets = Maps.newHashMap();
         Target target = new Target();
-        target.setUrlPattern("en.wikipedia.org/wiki/.*");
+        target.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
         Selector selector = new Selector();
         selector.setCssSelector("b a");
         selector.addAttribute("href");
         target.setSelectors(Lists.newArrayList(
                 selector
         ));
-        targets.put(target.getUrlPattern(), target);
-        task.setTargets(targets);
+        task.setTargets(Lists.newArrayList(target));
         return task;
+    }
+
+    @Test
+    public void parseLink() throws IOException {
+        Document document = Jsoup.connect(task.getEntranceUrls().get(0)).get();
+        List<String> links = task.parseLink(document);
+        assertTrue(links.size() > 0);
+    }
+
+    @Test
+    public void parseTarget() throws IOException {
+        Document document = Jsoup.connect(task.getEntranceUrls().get(0)).get();
+        List<Object> targets = task.parseTarget(document);
+        assertTrue(targets.size() > 0);
     }
 }

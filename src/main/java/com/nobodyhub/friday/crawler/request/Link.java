@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.regex.Pattern;
+
 /**
  * Links that will be traced by the crawler
  *
@@ -21,4 +23,11 @@ public class Link {
      * how to connet that link
      */
     protected Request request;
+
+    public boolean matches(String url) {
+        if (url == null) {
+            return false;
+        }
+        return Pattern.compile(urlPattern).matcher(url).find();
+    }
 }

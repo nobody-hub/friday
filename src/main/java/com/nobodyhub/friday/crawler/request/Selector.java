@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.List;
 
@@ -41,6 +44,17 @@ public class Selector {
         Attribute attribute = new Attribute();
         attribute.setAttr(attr);
         this.attributes.add(attribute);
+    }
+
+    public List<String> getAttrValues(Document document) {
+        List<String> values = Lists.newArrayList();
+        Elements elements = document.select(sel);
+        for (Element element : elements) {
+            for (Attribute attr : attributes) {
+                values.add(element.attr(attr.getAttr()));
+            }
+        }
+        return values;
     }
 }
 
