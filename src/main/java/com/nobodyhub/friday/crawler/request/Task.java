@@ -1,5 +1,9 @@
 package com.nobodyhub.friday.crawler.request;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +12,9 @@ import java.util.Map;
  *
  * @author Ryan
  */
+@Data
+@EqualsAndHashCode
+@ToString
 public class Task {
     /**
      * Task Name
@@ -18,7 +25,7 @@ public class Task {
      */
     protected String description;
     /**
-     * Task Version (Changed based on requirement)
+     * Task Version
      */
     protected String version;
     /**
@@ -31,11 +38,12 @@ public class Task {
     protected List<String> entranceUrl;
     /**
      * Links that will be traced by the crawler
-     * pattern => link
+     * urlPattern => link
      */
     protected Map<String, Link> links;
     /**
      * crawler target in the link
+     * urlPattern => target
      */
     protected Map<String, Target> targets;
 }
