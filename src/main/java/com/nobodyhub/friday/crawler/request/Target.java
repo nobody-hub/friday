@@ -41,7 +41,7 @@ public class Target {
         }
         List<Object> values = Lists.newArrayList();
         for (Selector selector : selectors) {
-            values.addAll(selector.getAttrValues(document));
+            values.addAll(selector.getAttrText(document));
         }
         return values;
     }

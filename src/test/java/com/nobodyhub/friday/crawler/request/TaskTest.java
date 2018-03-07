@@ -3,6 +3,7 @@ package com.nobodyhub.friday.crawler.request;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class TaskTest {
     @Before
     public void setup() {
         this.task = createTask();
-        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"request\":null}],\"targets\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"sel\":\"b a\",\"attributes\":[{\"attr\":\"href\"}]}]}]}";
+        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"request\":null}],\"targets\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"targetType\":\"IMAGE\",\"sel\":\"img\",\"attributes\":[],\"request\":{\"method\":\"GET\",\"headers\":null,\"requestBody\":null}}]}]}";
         objectMapper = new ObjectMapper();
     }
 
@@ -56,8 +57,11 @@ public class TaskTest {
         Target target = new Target();
         target.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
         Selector selector = new Selector();
-        selector.setCssSelector("b a");
-        selector.addAttribute("href");
+        selector.setTargetType(SelectTargetType.IMAGE);
+        selector.setCssSelector("img");
+        Request request = new Request();
+        request.setMethod(Connection.Method.GET);
+        selector.setRequest(request);
         target.setSelectors(Lists.newArrayList(
                 selector
         ));
@@ -76,6 +80,6 @@ public class TaskTest {
     public void parseTarget() throws IOException {
         Document document = Jsoup.connect(task.getEntranceUrls().get(0)).get();
         List<Object> targets = task.parseTarget(document);
-        assertTrue(targets.size() > 0);
+        assertTrue(targets.size() == 0);
     }
 }
