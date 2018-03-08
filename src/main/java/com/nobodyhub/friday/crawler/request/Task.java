@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.request;
 
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.request.interest.common.Interest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -44,10 +45,9 @@ public class Task {
      */
     protected List<Link> links;
     /**
-     * crawler target in the link
-     * urlPattern => target
+     * crawler interest in the link
      */
-    protected List<Target> targets;
+    protected List<Interest> interests;
 
     public List<String> parseLink(Document doc) {
         List<String> urls = Lists.newArrayList();
@@ -65,9 +65,9 @@ public class Task {
 
     public List<Object> parseTarget(Document doc) {
         List<Object> values = Lists.newArrayList();
-        for (Target target : targets) {
+        for (Interest target : interests) {
             if (target.matches(doc.baseUri())) {
-                values.addAll(target.parseEOI(doc));
+                values.addAll(target.fetch(doc));
             }
         }
         return values;
