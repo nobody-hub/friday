@@ -12,7 +12,7 @@ import com.nobodyhub.friday.crawler.request.interest.common.Selector;
 public abstract class JsonInterest<CONTENTTYPE, SELECTOR extends Selector<ReadContext, CONTENTTYPE>>
         extends Interest<CONTENTTYPE, ReadContext, SELECTOR> {
 
-    public JsonInterest(InterestType type, String urlPattern) {
-        super(type, urlPattern);
+    public JsonInterest(String urlPattern) {
+        super(InterestType.JSON, urlPattern);
     }
 }
