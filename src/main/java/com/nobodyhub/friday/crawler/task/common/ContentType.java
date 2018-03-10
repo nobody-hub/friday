@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.task.interest.common;
+package com.nobodyhub.friday.crawler.task.common;
 
 /**
  * Types of Interested Contents
@@ -7,7 +7,7 @@ package com.nobodyhub.friday.crawler.task.interest.common;
  */
 public enum ContentType {
     /**
-     * text of attributes of HTML
+     * Text included in HTML
      */
     TEXT,
     /**
@@ -21,9 +21,5 @@ public enum ContentType {
     /**
      * Video included in HTML
      */
-    VIDEO,
-    /**
-     * JSON properties included in JSON object
-     */
-    JSON
+    VIDEO
 }

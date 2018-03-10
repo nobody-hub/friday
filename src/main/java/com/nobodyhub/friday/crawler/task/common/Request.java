@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.task;
+package com.nobodyhub.friday.crawler.task.common;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

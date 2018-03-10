@@ -1,16 +1,17 @@
-package com.nobodyhub.friday.crawler.task.interest.common;
+package com.nobodyhub.friday.crawler.task.common;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.nobodyhub.friday.crawler.task.interest.html.attr.HtmlAttrSelector;
-import com.nobodyhub.friday.crawler.task.interest.html.audio.HtmlAudioSelector;
-import com.nobodyhub.friday.crawler.task.interest.html.image.HtmlImageSelector;
-import com.nobodyhub.friday.crawler.task.interest.html.video.HtmlVideoSelector;
-import com.nobodyhub.friday.crawler.task.interest.json.JsonSelector;
+import com.nobodyhub.friday.crawler.task.html.selector.HtmlAttrSelector;
+import com.nobodyhub.friday.crawler.task.html.selector.HtmlAudioSelector;
+import com.nobodyhub.friday.crawler.task.html.selector.HtmlImageSelector;
+import com.nobodyhub.friday.crawler.task.html.selector.HtmlVideoSelector;
+import com.nobodyhub.friday.crawler.task.json.JsonSelector;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Ryan
@@ -36,9 +37,13 @@ public abstract class Selector<DOCUMENT> {
      */
     protected final ContentType type;
     /**
-     * the selector text
+     * Url REGEX pattern that restrict the target
      */
-    protected final String selector;
+    protected final String urlPattern;
+    /**
+     * the selector path
+     */
+    protected final String selPath;
 
     /**
      * select the interested content from given {@link DOCUMENT}
@@ -47,6 +52,19 @@ public abstract class Selector<DOCUMENT> {
      * @return
      */
     public abstract List<String> select(DOCUMENT document);
+
+    /**
+     * whether target url matches this interest
+     *
+     * @param url
+     * @return
+     */
+    public boolean matches(String url) {
+        if (url == null) {
+            return false;
+        }
+        return Pattern.compile(urlPattern).matcher(url).find();
+    }
 }
 
 
