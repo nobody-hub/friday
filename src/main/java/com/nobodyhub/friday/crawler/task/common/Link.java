@@ -1,9 +1,11 @@
 package com.nobodyhub.friday.crawler.task.common;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
@@ -17,23 +19,27 @@ import java.util.regex.Pattern;
 @Data
 @EqualsAndHashCode
 @ToString
+@RequiredArgsConstructor
 public abstract class Link<DOCUMENT, SELECTOR extends Selector<DOCUMENT>> {
     /**
      * url pattern that link need match
      * <p>
-     * the {@link SELECTOR#urlPattern} will be ignored
+     * <b>Note:</b>the {@link SELECTOR#urlPattern} will be ignored
      */
-    protected String urlPattern;
+    @JsonProperty("urlPattern")
+    protected final String urlPattern;
 
     /**
      * the selector to get the link
      */
-    protected SELECTOR selector;
+    @JsonProperty("selector")
+    protected final SELECTOR selector;
 
     /**
      * how to connet the link
      */
-    protected Request request;
+    @JsonProperty("request")
+    protected final Request request;
 
     /**
      * whether the given url will be used as a future link or not

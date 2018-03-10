@@ -1,6 +1,11 @@
 package com.nobodyhub.friday.crawler.task.common;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.task.html.HtmlTask;
+import com.nobodyhub.friday.crawler.task.json.JsonTask;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +18,16 @@ import java.util.List;
  *
  * @author Ryan
  */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "taskType",
+        visible = true
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = HtmlTask.class, name = "HTML"),
+        @JsonSubTypes.Type(value = JsonTask.class, name = "JSON")
+})
 @Data
 @EqualsAndHashCode
 @ToString
@@ -24,35 +39,43 @@ public abstract class Task<
     /**
      * Type of task
      */
+    @JsonProperty("taskType")
     protected final TaskType taskType;
     /**
      * Task Name
      */
-    protected String name;
+    @JsonProperty("name")
+    protected final String name;
     /**
      * Task Description
      */
-    protected String description;
+    @JsonProperty("description")
+    protected final String description;
     /**
      * Task Version
      */
-    protected String version;
+    @JsonProperty("version")
+    protected final String version;
     /**
      * Task User-Agent
      */
-    protected String userAgent;
+    @JsonProperty("userAgent")
+    protected final String userAgent;
     /**
      * Entrance urls of crawler
      */
-    protected List<String> entranceUrls;
+    @JsonProperty("entranceUrls")
+    protected final List<String> entranceUrls;
     /**
      * Links that will be traced by the crawler
      */
-    protected List<LINK> links;
+    @JsonProperty("links")
+    protected final List<LINK> links;
     /**
      * selectors to select interested contents
      */
-    protected List<SELECTOR> selectors;
+    @JsonProperty("selectors")
+    protected final List<SELECTOR> selectors;
 
     /**
      * Get futher links
@@ -82,6 +105,10 @@ public abstract class Task<
             }
         }
         return values;
+    }
+
+    public void addEntranceUrl(String url) {
+        this.entranceUrls.add(url);
     }
 
     /**
