@@ -3,7 +3,6 @@ package com.nobodyhub.friday.crawler.request;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -26,7 +25,7 @@ public class TaskTest {
     @Before
     public void setup() {
         this.task = createTask();
-        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"request\":null}],\"targets\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"targetType\":\"IMAGE\",\"sel\":\"img\",\"attributes\":[],\"request\":{\"method\":\"GET\",\"headers\":null,\"requestBody\":null}}]}]}";
+        taskJson = "{\"name\":\"TaskName\",\"description\":\"TaskDescription\",\"version\":\"1.2.3\",\"userAgent\":\"Friday\",\"entranceUrls\":[\"http://en.wikipedia.org/\"],\"links\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"request\":null}],\"targets\":[{\"urlPattern\":\"en\\\\.wikipedia\\\\.org/wiki/.*\",\"selectors\":[{\"type\":\"CSS\",\"targetType\":\"IMAGE\",\"selector\":\"img\",\"attributes\":[],\"request\":{\"method\":\"GET\",\"headers\":null,\"requestBody\":null}}]}]}";
         objectMapper = new ObjectMapper();
     }
 
@@ -53,19 +52,19 @@ public class TaskTest {
         Link link = new Link();
         link.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
         task.setLinks(Lists.newArrayList(link));
-
-        Target target = new Target();
-        target.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
-        Selector selector = new Selector();
-        selector.setTargetType(SelectTargetType.IMAGE);
-        selector.setCssSelector("img");
-        Request request = new Request();
-        request.setMethod(Connection.Method.GET);
-        selector.setRequest(request);
-        target.setSelectors(Lists.newArrayList(
-                selector
-        ));
-        task.setTargets(Lists.newArrayList(target));
+//TODO
+//        AbstractTarget target = new AbstractTarget();
+//        target.setUrlPattern("en\\.wikipedia\\.org/wiki/.*");
+//        AbstractSelector selector = new AbstractSelector();
+//        selector.setTargetType(TargetType.IMAGE);
+//        selector.setCssSelector("img");
+//        Request request = new Request();
+//        request.setMethod(Connection.Method.GET);
+//        selector.setRequest(request);
+//        target.setSelectors(Lists.newArrayList(
+//                selector
+//        ));
+//        task.setTargets(Lists.newArrayList(target));
         return task;
     }
 

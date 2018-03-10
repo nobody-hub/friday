@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.image;
 
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.common.Selector;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +15,7 @@ import java.util.List;
 public class HtmlImageSelector extends Selector<Document, String> {
 
     public HtmlImageSelector(String selector) {
-        super(selector);
+        super(ContentType.IMAGE, selector);
     }
 
     @Override

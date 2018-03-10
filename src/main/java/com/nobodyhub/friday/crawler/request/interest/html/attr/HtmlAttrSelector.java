@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.attr;
 
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.common.Selector;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +19,7 @@ public class HtmlAttrSelector extends Selector<Document, String> {
     protected final List<String> attributes;
 
     public HtmlAttrSelector(String selector) {
-        super(selector);
+        super(ContentType.TEXT, selector);
         this.attributes = Lists.newArrayList();
     }
 

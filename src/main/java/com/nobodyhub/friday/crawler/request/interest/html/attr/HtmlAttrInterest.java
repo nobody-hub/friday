@@ -1,7 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.attr;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.InterestType;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.html.HtmlInterest;
 import org.jsoup.nodes.Document;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class HtmlAttrInterest extends HtmlInterest<String, HtmlAttrSelector> {
     public HtmlAttrInterest(String urlPattern) {
-        super(InterestType.TEXT, urlPattern);
+        super(ContentType.TEXT, urlPattern);
     }
 
     @Override

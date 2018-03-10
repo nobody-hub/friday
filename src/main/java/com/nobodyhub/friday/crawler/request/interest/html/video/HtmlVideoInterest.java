@@ -1,7 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.video;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.InterestType;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.html.HtmlInterest;
 import org.jsoup.nodes.Document;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class HtmlVideoInterest extends HtmlInterest<String, HtmlVideoSelector> {
     public HtmlVideoInterest(String urlPattern) {
-        super(InterestType.VIDEO, urlPattern);
+        super(ContentType.VIDEO, urlPattern);
     }
 
     @Override

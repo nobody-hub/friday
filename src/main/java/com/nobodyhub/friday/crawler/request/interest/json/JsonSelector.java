@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.json;
 
 import com.jayway.jsonpath.ReadContext;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.common.Selector;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class JsonSelector extends Selector<ReadContext, String> {
 
     public JsonSelector(String selector) {
-        super(selector);
+        super(ContentType.JSON, selector);
     }
 
     @Override

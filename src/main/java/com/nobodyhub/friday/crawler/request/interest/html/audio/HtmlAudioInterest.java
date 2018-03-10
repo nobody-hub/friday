@@ -1,7 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.audio;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.InterestType;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.html.HtmlInterest;
 import org.jsoup.nodes.Document;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class HtmlAudioInterest extends HtmlInterest<String, HtmlAudioSelector> {
     public HtmlAudioInterest(String urlPattern) {
-        super(InterestType.AUDIO, urlPattern);
+        super(ContentType.AUDIO, urlPattern);
     }
 
     @Override

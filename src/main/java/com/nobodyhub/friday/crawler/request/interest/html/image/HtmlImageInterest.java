@@ -1,7 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.image;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.InterestType;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.html.HtmlInterest;
 import org.jsoup.nodes.Document;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class HtmlImageInterest extends HtmlInterest<String, HtmlImageSelector> {
     public HtmlImageInterest(String urlPattern) {
-        super(InterestType.IMAGE, urlPattern);
+        super(ContentType.IMAGE, urlPattern);
     }
 
     @Override

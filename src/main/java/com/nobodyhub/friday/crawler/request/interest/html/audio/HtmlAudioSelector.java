@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.request.interest.html.audio;
 
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
 import com.nobodyhub.friday.crawler.request.interest.common.Selector;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,7 +15,7 @@ import java.util.List;
 public class HtmlAudioSelector extends Selector<Document, String> {
 
     public HtmlAudioSelector(String selector) {
-        super(selector);
+        super(ContentType.AUDIO, selector);
     }
 
     @Override
