@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlAttrInterest extends HtmlInterest<String, HtmlAttrSelector> {
+public class HtmlAttrInterest extends HtmlInterest<HtmlAttrSelector> {
     public HtmlAttrInterest(String urlPattern) {
         super(ContentType.TEXT, urlPattern);
     }

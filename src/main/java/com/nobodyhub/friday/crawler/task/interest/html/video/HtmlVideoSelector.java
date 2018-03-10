@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlVideoSelector extends Selector<Document, String> {
+public class HtmlVideoSelector extends Selector<Document> {
 
     public HtmlVideoSelector(String selector) {
         super(ContentType.VIDEO, selector);

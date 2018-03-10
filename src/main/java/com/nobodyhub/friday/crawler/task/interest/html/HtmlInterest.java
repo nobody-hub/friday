@@ -9,8 +9,8 @@ import org.jsoup.nodes.Document;
 /**
  * @author Ryan
  */
-public abstract class HtmlInterest<CONTENTTYPE, SELECTOR extends Selector<Document, CONTENTTYPE>>
-        extends Interest<CONTENTTYPE, Document, SELECTOR> {
+public abstract class HtmlInterest<SELECTOR extends Selector<Document>>
+        extends Interest<Document, SELECTOR> {
 
     public HtmlInterest(ContentType type, String urlPattern) {
         super(type, urlPattern);

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlImageSelector extends Selector<Document, String> {
+public class HtmlImageSelector extends Selector<Document> {
 
     public HtmlImageSelector(String selector) {
         super(ContentType.IMAGE, selector);

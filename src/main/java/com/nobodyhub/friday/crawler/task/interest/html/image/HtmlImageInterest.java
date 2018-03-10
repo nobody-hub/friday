@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlImageInterest extends HtmlInterest<String, HtmlImageSelector> {
+public class HtmlImageInterest extends HtmlInterest<HtmlImageSelector> {
     public HtmlImageInterest(String urlPattern) {
         super(ContentType.IMAGE, urlPattern);
     }

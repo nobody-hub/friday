@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlVideoInterest extends HtmlInterest<String, HtmlVideoSelector> {
+public class HtmlVideoInterest extends HtmlInterest<HtmlVideoSelector> {
     public HtmlVideoInterest(String urlPattern) {
         super(ContentType.VIDEO, urlPattern);
     }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlAttrSelector extends Selector<Document, String> {
+public class HtmlAttrSelector extends Selector<Document> {
     /**
      * intereted attr of the selected element
      */

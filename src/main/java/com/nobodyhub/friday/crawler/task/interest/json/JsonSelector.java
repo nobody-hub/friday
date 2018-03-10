@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class JsonSelector extends Selector<ReadContext, String> {
+public class JsonSelector extends Selector<ReadContext> {
 
     public JsonSelector(String selector) {
         super(ContentType.JSON, selector);

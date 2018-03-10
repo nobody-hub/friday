@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlAudioSelector extends Selector<Document, String> {
+public class HtmlAudioSelector extends Selector<Document> {
 
     public HtmlAudioSelector(String selector) {
         super(ContentType.AUDIO, selector);

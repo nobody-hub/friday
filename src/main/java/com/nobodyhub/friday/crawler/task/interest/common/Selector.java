@@ -30,7 +30,7 @@ import java.util.List;
 })
 @RequiredArgsConstructor
 @Getter
-public abstract class Selector<DOCUMENT, CONTENTTYPE> {
+public abstract class Selector<DOCUMENT> {
     /**
      * Type of content
      */
@@ -41,12 +41,12 @@ public abstract class Selector<DOCUMENT, CONTENTTYPE> {
     protected final String selector;
 
     /**
-     * select the interested {@link CONTENTTYPE} from given {@link DOCUMENT}
+     * select the interested content from given {@link DOCUMENT}
      *
      * @param document
      * @return
      */
-    public abstract List<CONTENTTYPE> select(DOCUMENT document);
+    public abstract List<String> select(DOCUMENT document);
 }
 
 

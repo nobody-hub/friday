@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlAudioInterest extends HtmlInterest<String, HtmlAudioSelector> {
+public class HtmlAudioInterest extends HtmlInterest<HtmlAudioSelector> {
     public HtmlAudioInterest(String urlPattern) {
         super(ContentType.AUDIO, urlPattern);
     }

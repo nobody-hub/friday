@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 })
 @Getter
 @RequiredArgsConstructor
-public abstract class Interest<CONTENTTYPE, DOCUMENT, SELECTOR extends Selector<DOCUMENT, CONTENTTYPE>> {
+public abstract class Interest<DOCUMENT, SELECTOR extends Selector<DOCUMENT>> {
     /**
      * Type of content
      */
@@ -54,7 +54,7 @@ public abstract class Interest<CONTENTTYPE, DOCUMENT, SELECTOR extends Selector<
      * @param document
      * @return
      */
-    public abstract List<CONTENTTYPE> fetch(DOCUMENT document);
+    public abstract List<String> fetch(DOCUMENT document);
 
     /**
      * add selector to this interest
