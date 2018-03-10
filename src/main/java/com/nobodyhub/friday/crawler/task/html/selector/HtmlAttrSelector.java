@@ -18,6 +18,7 @@ import java.util.List;
 public class HtmlAttrSelector extends HtmlSelector {
     /**
      * intereted attr of the selected element
+     * if empty, will get element.text()
      */
     @JsonProperty("attributes")
     protected final List<String> attributes;
@@ -34,8 +35,12 @@ public class HtmlAttrSelector extends HtmlSelector {
         List<String> contents = Lists.newArrayList();
         Elements elements = document.select(selector);
         for (Element element : elements) {
-            for (String attr : this.attributes) {
-                contents.add(element.attr(attr));
+            if (this.attributes.isEmpty()) {
+                contents.add(element.text());
+            } else {
+                for (String attr : this.attributes) {
+                    contents.add(element.attr(attr));
+                }
             }
         }
         return contents;
