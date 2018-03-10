@@ -1,8 +1,10 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.html.HtmlSelector;
+import lombok.EqualsAndHashCode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,9 +14,12 @@ import java.util.List;
 /**
  * @author Ryan
  */
+@EqualsAndHashCode(callSuper = true)
 public class HtmlImageSelector extends HtmlSelector {
 
-    public HtmlImageSelector(String urlPattern, String selector) {
+    public HtmlImageSelector(
+            @JsonProperty("urlPattern") String urlPattern,
+            @JsonProperty("selector") String selector) {
         super(ContentType.IMAGE, urlPattern, selector);
     }
 

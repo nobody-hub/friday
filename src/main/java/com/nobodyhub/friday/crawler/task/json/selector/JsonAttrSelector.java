@@ -1,22 +1,18 @@
 package com.nobodyhub.friday.crawler.task.json.selector;
 
-import com.google.common.collect.Lists;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.json.JsonSelector;
-
-import java.util.List;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Ryan
  */
+@EqualsAndHashCode(callSuper = true)
 public class JsonAttrSelector extends JsonSelector {
-    /**
-     * intereted attr of the selected element
-     */
-    protected final List<String> attributes;
-
-    public JsonAttrSelector(String urlPattern, String selector) {
+    public JsonAttrSelector(
+            @JsonProperty("urlPattern") String urlPattern,
+            @JsonProperty("selector") String selector) {
         super(ContentType.TEXT, urlPattern, selector);
-        this.attributes = Lists.newArrayList();
     }
 }
