@@ -11,6 +11,7 @@ import com.nobodyhub.friday.crawler.task.json.selector.JsonVideoSelector;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -100,5 +101,19 @@ public class SelectorTest implements SerializationTest {
         assertEquals(selector, objectMapper.readValue(json, JsonSelector.class));
     }
 
-
+    @Test
+    public void testMatches() {
+        String urlPattern = "^stackoverflow\\.*\\d?";
+        Selector selector = new Selector(ContentType.TEXT, urlPattern, "selector") {
+            @Override
+            public List<String> select(Object o) {
+                return null;
+            }
+        };
+        assertEquals(true, selector.matches("stackoverflow.com"));
+        assertEquals(false, selector.matches("https://stackoverflow.com"));
+        assertEquals(true, selector.matches("stackoverflow/questions"));
+        assertEquals(true, selector.matches("stackoverflow.com1"));
+        assertEquals(false, selector.matches("stackNOToverflow.com"));
+    }
 }
