@@ -7,19 +7,24 @@ package com.nobodyhub.friday.crawler.task.common;
  */
 public enum ContentType {
     /**
-     * Text included in HTML
+     * Absolute URL
+     * the difference with {@link this#TEXT} is the value of {@link this#URL} might be a base URL + value of {@link this#TEXT}
+     */
+    URL,
+    /**
+     * Text, usually the attribute of element
      */
     TEXT,
     /**
-     * Imaage included in HTML
+     * Imaage
      */
     IMAGE,
     /**
-     * Audio included in HTML
+     * Audio
      */
     AUDIO,
     /**
-     * Video included in HTML
+     * Video
      */
     VIDEO
 }

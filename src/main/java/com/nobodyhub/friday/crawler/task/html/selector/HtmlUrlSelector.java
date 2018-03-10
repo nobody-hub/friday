@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlImageSelector extends HtmlSelector {
+public class HtmlUrlSelector extends HtmlSelector {
 
-    public HtmlImageSelector(String urlPattern, String selector) {
-        super(ContentType.IMAGE, urlPattern, selector);
+    public HtmlUrlSelector(String urlPattern, String selector) {
+        super(ContentType.URL, urlPattern, selector);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class HtmlImageSelector extends HtmlSelector {
         List<String> contents = Lists.newArrayList();
         Elements elements = document.select(selector);
         for (Element element : elements) {
-            element.absUrl("src");
+            contents.add(element.absUrl("href"));
         }
         return contents;
     }

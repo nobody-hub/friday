@@ -26,7 +26,7 @@ public class HtmlAttrSelector extends HtmlSelector {
     @Override
     public List<String> select(Document document) {
         List<String> contents = Lists.newArrayList();
-        Elements elements = document.select(selPath);
+        Elements elements = document.select(selector);
         for (Element element : elements) {
             for (String attr : this.attributes) {
                 contents.add(element.attr(attr));

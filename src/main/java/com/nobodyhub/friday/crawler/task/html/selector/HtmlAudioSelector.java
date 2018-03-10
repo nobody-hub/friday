@@ -21,7 +21,7 @@ public class HtmlAudioSelector extends HtmlSelector {
     @Override
     public List<String> select(Document document) {
         List<String> contents = Lists.newArrayList();
-        Elements elements = document.select(selPath);
+        Elements elements = document.select(selector);
         for (Element element : elements) {
             element.absUrl("src");
         }

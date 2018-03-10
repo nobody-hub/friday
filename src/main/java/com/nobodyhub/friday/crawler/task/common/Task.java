@@ -19,7 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class Task<
         DOCUMENT,
-        SELECTOR extends Selector<DOCUMENT>> {
+        SELECTOR extends Selector<DOCUMENT>,
+        LINK extends Link<DOCUMENT, ? extends SELECTOR>> {
     /**
      * Type of task
      */
@@ -47,7 +48,7 @@ public abstract class Task<
     /**
      * Links that will be traced by the crawler
      */
-    protected List<Link> links;
+    protected List<LINK> links;
     /**
      * selectors to select interested contents
      */
@@ -59,7 +60,13 @@ public abstract class Task<
      * @param document
      * @return
      */
-    public abstract List<String> parseLink(DOCUMENT document);
+    public List<String> parseLink(DOCUMENT document) {
+        List<String> urls = Lists.newArrayList();
+        for (LINK link : links) {
+            urls.addAll(link.parse(document));
+        }
+        return urls;
+    }
 
     /**
      * Get contents of selectors
@@ -78,11 +85,20 @@ public abstract class Task<
     }
 
     /**
-     * add selPath to this interest
+     * add selector to select interested contents
      *
      * @param selector
      */
     public void addSelector(SELECTOR selector) {
         this.selectors.add(selector);
+    }
+
+    /**
+     * add link to fetch more contents
+     *
+     * @param link
+     */
+    public void addLink(LINK link) {
+        this.links.add(link);
     }
 }

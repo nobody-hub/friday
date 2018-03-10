@@ -17,6 +17,6 @@ public abstract class JsonSelector extends Selector<ReadContext> {
 
     @Override
     public List<String> select(ReadContext document) {
-        return document.read(selPath);
+        return document.read(selector);
     }
 }

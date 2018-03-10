@@ -43,7 +43,7 @@ public abstract class Selector<DOCUMENT> {
     /**
      * the selector path
      */
-    protected final String selPath;
+    protected final String selector;
 
     /**
      * select the interested content from given {@link DOCUMENT}

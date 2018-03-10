@@ -5,10 +5,11 @@ import com.nobodyhub.friday.crawler.task.common.Selector;
 import org.jsoup.nodes.Document;
 
 /**
+ * Links in HTML
+ *
  * @author Ryan
  */
 public abstract class HtmlSelector extends Selector<Document> {
-
     public HtmlSelector(ContentType type, String urlPattern, String selector) {
         super(type, urlPattern, selector);
     }

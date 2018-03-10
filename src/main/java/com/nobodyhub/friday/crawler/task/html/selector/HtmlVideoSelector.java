@@ -21,7 +21,7 @@ public class HtmlVideoSelector extends HtmlSelector {
     @Override
     public List<String> select(Document document) {
         List<String> contents = Lists.newArrayList();
-        Elements elements = document.select(selPath + " source");
+        Elements elements = document.select(selector + " source");
         for (Element element : elements) {
             element.absUrl("src");
         }
