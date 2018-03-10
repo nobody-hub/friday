@@ -1,12 +1,12 @@
-package com.nobodyhub.friday.crawler.request.interest.common;
+package com.nobodyhub.friday.crawler.task.interest.common;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.nobodyhub.friday.crawler.request.interest.html.attr.HtmlAttrSelector;
-import com.nobodyhub.friday.crawler.request.interest.html.audio.HtmlAudioSelector;
-import com.nobodyhub.friday.crawler.request.interest.html.image.HtmlImageSelector;
-import com.nobodyhub.friday.crawler.request.interest.html.video.HtmlVideoSelector;
-import com.nobodyhub.friday.crawler.request.interest.json.JsonSelector;
+import com.nobodyhub.friday.crawler.task.interest.html.attr.HtmlAttrSelector;
+import com.nobodyhub.friday.crawler.task.interest.html.audio.HtmlAudioSelector;
+import com.nobodyhub.friday.crawler.task.interest.html.image.HtmlImageSelector;
+import com.nobodyhub.friday.crawler.task.interest.html.video.HtmlVideoSelector;
+import com.nobodyhub.friday.crawler.task.interest.json.JsonSelector;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

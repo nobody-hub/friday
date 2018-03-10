@@ -1,9 +1,9 @@
-package com.nobodyhub.friday.crawler.request.interest.html;
+package com.nobodyhub.friday.crawler.task.interest.html;
 
 
-import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
-import com.nobodyhub.friday.crawler.request.interest.common.Interest;
-import com.nobodyhub.friday.crawler.request.interest.common.Selector;
+import com.nobodyhub.friday.crawler.task.interest.common.ContentType;
+import com.nobodyhub.friday.crawler.task.interest.common.Interest;
+import com.nobodyhub.friday.crawler.task.interest.common.Selector;
 import org.jsoup.nodes.Document;
 
 /**

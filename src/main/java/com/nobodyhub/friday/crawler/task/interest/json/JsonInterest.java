@@ -1,10 +1,10 @@
-package com.nobodyhub.friday.crawler.request.interest.json;
+package com.nobodyhub.friday.crawler.task.interest.json;
 
 
 import com.jayway.jsonpath.ReadContext;
-import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
-import com.nobodyhub.friday.crawler.request.interest.common.Interest;
-import com.nobodyhub.friday.crawler.request.interest.common.Selector;
+import com.nobodyhub.friday.crawler.task.interest.common.ContentType;
+import com.nobodyhub.friday.crawler.task.interest.common.Interest;
+import com.nobodyhub.friday.crawler.task.interest.common.Selector;
 
 /**
  * @author Ryan

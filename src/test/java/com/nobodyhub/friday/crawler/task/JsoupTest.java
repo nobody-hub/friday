@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.request;
+package com.nobodyhub.friday.crawler.task;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

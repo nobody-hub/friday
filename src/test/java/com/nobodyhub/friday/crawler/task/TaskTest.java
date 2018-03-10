@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.request;
+package com.nobodyhub.friday.crawler.task;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

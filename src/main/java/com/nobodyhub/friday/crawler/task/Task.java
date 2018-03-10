@@ -1,7 +1,7 @@
-package com.nobodyhub.friday.crawler.request;
+package com.nobodyhub.friday.crawler.task;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.Interest;
+import com.nobodyhub.friday.crawler.task.interest.common.Interest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

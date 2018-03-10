@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.request.interest.common;
+package com.nobodyhub.friday.crawler.task.interest.common;
 
 /**
  * Types of Interested Contents

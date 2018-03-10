@@ -1,8 +1,8 @@
-package com.nobodyhub.friday.crawler.request.interest.html.image;
+package com.nobodyhub.friday.crawler.task.interest.html.audio;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
-import com.nobodyhub.friday.crawler.request.interest.common.Selector;
+import com.nobodyhub.friday.crawler.task.interest.common.ContentType;
+import com.nobodyhub.friday.crawler.task.interest.common.Selector;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public class HtmlImageSelector extends Selector<Document, String> {
+public class HtmlAudioSelector extends Selector<Document, String> {
 
-    public HtmlImageSelector(String selector) {
-        super(ContentType.IMAGE, selector);
+    public HtmlAudioSelector(String selector) {
+        super(ContentType.AUDIO, selector);
     }
 
     @Override

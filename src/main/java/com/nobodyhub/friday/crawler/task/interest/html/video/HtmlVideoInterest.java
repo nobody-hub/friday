@@ -1,8 +1,8 @@
-package com.nobodyhub.friday.crawler.request.interest.html.video;
+package com.nobodyhub.friday.crawler.task.interest.html.video;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.request.interest.common.ContentType;
-import com.nobodyhub.friday.crawler.request.interest.html.HtmlInterest;
+import com.nobodyhub.friday.crawler.task.interest.common.ContentType;
+import com.nobodyhub.friday.crawler.task.interest.html.HtmlInterest;
 import org.jsoup.nodes.Document;
 
 import java.util.List;
