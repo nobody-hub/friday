@@ -1,5 +1,6 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
+import com.nobodyhub.friday.crawler.task.html.HtmlSelectorTest;
 import org.junit.Test;
 
 import java.util.List;

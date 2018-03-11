@@ -1,8 +1,7 @@
-package com.nobodyhub.friday.crawler.task.html.selector;
+package com.nobodyhub.friday.crawler.task.html;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.nobodyhub.friday.crawler.task.html.HtmlSelector;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -19,7 +18,7 @@ public abstract class HtmlSelectorTest {
 
     @Before
     public void setup() throws URISyntaxException, IOException {
-        document = Jsoup.parse(Resources.toString(getClass().getResource("selector.html"), Charsets.UTF_8));
+        document = Jsoup.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/task/html/selector.html"), Charsets.UTF_8));
         document.setBaseUri("http://nobodyhub.com/selector/test");
     }
 }

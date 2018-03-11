@@ -38,6 +38,4 @@ public class HtmlVideoSelector extends HtmlSelector {
         }
         return contents;
     }
-
-
 }
