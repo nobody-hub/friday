@@ -29,6 +29,9 @@ public abstract class Selector<DOCUMENT> {
     protected final String urlPattern;
     /**
      * the selector path
+     *
+     * @see <a href="https://www.w3schools.com/cssref/css_selectors.asp">CSS Selector for HTML</a>
+     * @see <a href="https://github.com/json-path/JsonPath">JsonPath for JSON</a>
      */
     @JsonProperty("selector")
     protected final String selector;

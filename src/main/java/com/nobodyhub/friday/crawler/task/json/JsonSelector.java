@@ -35,8 +35,15 @@ public abstract class JsonSelector extends Selector<ReadContext> {
         super(type, urlPattern, selector);
     }
 
+    /**
+     * Prefix {@code $..} added to ensure the path will return a list
+     *
+     * @param document
+     * @return
+     * @see <a href="https://github.com/json-path/JsonPath#what-is-returned-when">what-is-returned-when</a>
+     */
     @Override
     public List<String> select(ReadContext document) {
-        return document.read(selector);
+        return document.read("$.." + selector);
     }
 }
