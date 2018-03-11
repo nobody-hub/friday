@@ -28,7 +28,7 @@ public class HtmlImageSelector extends HtmlSelector {
         List<String> contents = Lists.newArrayList();
         Elements elements = document.select(selector);
         for (Element element : elements) {
-            element.absUrl("src");
+            contents.add(element.absUrl("src"));
         }
         return contents;
     }
