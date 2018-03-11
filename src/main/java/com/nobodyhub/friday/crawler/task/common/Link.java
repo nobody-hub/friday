@@ -1,8 +1,6 @@
 package com.nobodyhub.friday.crawler.task.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +59,7 @@ public abstract class Link<DOCUMENT, SELECTOR extends Selector<DOCUMENT>> {
      * @return
      */
     public List<String> parse(DOCUMENT document) {
-        return Lists.newArrayList(Collections2.filter(selector.select(document), (input) -> matches(input)));
+        return selector.select(document);
     }
 
 }
