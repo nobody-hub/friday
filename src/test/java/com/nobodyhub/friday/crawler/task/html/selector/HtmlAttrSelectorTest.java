@@ -12,9 +12,9 @@ import static org.junit.Assert.assertEquals;
 public class HtmlAttrSelectorTest extends HtmlSelectorTest {
 
     @Test
-    public void testSelect() {
-        HtmlAttrSelector selector = new HtmlAttrSelector("urlPattern", "a.mnav");
-        selector.addAttribute("name");
+    public void testSelectWithAttr() {
+        selector = new HtmlAttrSelector("urlPattern", "a.mnav");
+        ((HtmlAttrSelector) selector).addAttribute("name");
         List<String> contents = selector.select(document);
         assertEquals(6, contents.size());
         assertEquals(true, contents.contains("tj_trnews"));
@@ -26,8 +26,8 @@ public class HtmlAttrSelectorTest extends HtmlSelectorTest {
     }
 
     @Test
-    public void testSelect2() {
-        HtmlAttrSelector selector = new HtmlAttrSelector("urlPattern", "a.mnav");
+    public void testSelectWithoutAttr() {
+        selector = new HtmlAttrSelector("urlPattern", "a.mnav");
         List<String> contents = selector.select(document);
         assertEquals(6, contents.size());
         assertEquals(true, contents.contains("新闻"));
