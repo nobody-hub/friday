@@ -35,7 +35,7 @@ import java.util.List;
 public abstract class Task<
         DOCUMENT,
         SELECTOR extends Selector<DOCUMENT>,
-        LINK extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
+        LINKPATTERN extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
     /**
      * Type of task
      */
@@ -65,12 +65,12 @@ public abstract class Task<
      * Entrance urls of crawler
      */
     @JsonProperty("entranceUrls")
-    protected final List<String> entranceUrls;
+    protected final List<Link> entranceUrls;
     /**
      * Links that will be traced by the crawler
      */
     @JsonProperty("links")
-    protected final List<LINK> links;
+    protected final List<LINKPATTERN> links;
     /**
      * selectors to select interested contents
      */
@@ -85,8 +85,8 @@ public abstract class Task<
      */
     public List<String> parseLink(DOCUMENT document) {
         List<String> urls = Lists.newArrayList();
-        for (LINK link : links) {
-            urls.addAll(link.parse(document));
+        for (LINKPATTERN pattern : links) {
+            urls.addAll(pattern.parse(document));
         }
         return urls;
     }
@@ -107,8 +107,8 @@ public abstract class Task<
         return values;
     }
 
-    public void addEntranceUrl(String url) {
-        this.entranceUrls.add(url);
+    public void addEntranceUrl(Link link) {
+        this.entranceUrls.add(link);
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class Task<
      *
      * @param link
      */
-    public void addLink(LINK link) {
+    public void addLink(LINKPATTERN link) {
         this.links.add(link);
     }
 }
