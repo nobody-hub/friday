@@ -12,9 +12,9 @@ import java.net.URISyntaxException;
 /**
  * @author Ryan
  */
-public abstract class HtmlSelectorTest {
+public abstract class HtmlSelectorPatternTest {
     protected Document document;
-    protected HtmlSelector selector;
+    protected HtmlSelectorPattern selector;
 
     @Before
     public void setup() throws URISyntaxException, IOException {

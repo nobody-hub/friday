@@ -3,6 +3,7 @@ package com.nobodyhub.friday.crawler.task.html;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.task.common.Link;
 import com.nobodyhub.friday.crawler.task.common.Task;
 import com.nobodyhub.friday.crawler.task.common.TaskType;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 public class HtmlTask
-        extends Task<Document, HtmlSelector, HtmlLinkPattern> {
+        extends Task<Document, HtmlSelectorPattern, HtmlLinkPattern> {
     public HtmlTask(
             String name,
             String description,
@@ -39,9 +40,9 @@ public class HtmlTask
             @JsonProperty("description") String description,
             @JsonProperty("version") String version,
             @JsonProperty("userAgent") String userAgent,
-            @JsonProperty("entranceUrls") List<String> entranceUrls,
+            @JsonProperty("entranceUrls") List<Link> entranceUrls,
             @JsonProperty("htmlLinks") List<HtmlLinkPattern> htmlLinks,
-            @JsonProperty("htmlSelectors") List<HtmlSelector> htmlSelectors) {
+            @JsonProperty("htmlSelectors") List<HtmlSelectorPattern> htmlSelectors) {
         super(TaskType.HTML,
                 name,
                 description,

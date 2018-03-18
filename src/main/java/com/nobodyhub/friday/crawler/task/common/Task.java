@@ -34,7 +34,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class Task<
         DOCUMENT,
-        SELECTOR extends Selector<DOCUMENT>,
+        SELECTOR extends SelectorPattern<DOCUMENT>,
         LINKPATTERN extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
     /**
      * Type of task
@@ -97,11 +97,11 @@ public abstract class Task<
      * @param document
      * @return
      */
-    public List<String> parseContent(String url, DOCUMENT document) {
-        List<String> values = Lists.newArrayList();
+    public List<SelectorResult> parseContent(String url, DOCUMENT document) {
+        List<SelectorResult> values = Lists.newArrayList();
         for (SELECTOR target : selectors) {
             if (target.matches(url)) {
-                values.addAll(target.select(document));
+                values.add(target.select(url, document));
             }
         }
         return values;

@@ -1,6 +1,6 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
-import com.nobodyhub.friday.crawler.task.html.HtmlSelectorTest;
+import com.nobodyhub.friday.crawler.task.html.HtmlSelectorPatternTest;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,12 +10,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Ryan
  */
-public class HtmlAttrSelectorTest extends HtmlSelectorTest {
+public class HtmlAttrSelectorPatternTest extends HtmlSelectorPatternTest {
 
     @Test
     public void testSelectWithAttr() {
-        selector = new HtmlAttrSelector("urlPattern", "a.mnav");
-        ((HtmlAttrSelector) selector).addAttribute("name");
+        selector = new HtmlAttrSelectorPattern("urlPattern", "a.mnav");
+        ((HtmlAttrSelectorPattern) selector).addAttribute("name");
         List<String> contents = selector.select(document);
         assertEquals(6, contents.size());
         assertEquals(true, contents.contains("tj_trnews"));
@@ -28,7 +28,7 @@ public class HtmlAttrSelectorTest extends HtmlSelectorTest {
 
     @Test
     public void testSelectWithoutAttr() {
-        selector = new HtmlAttrSelector("urlPattern", "a.mnav");
+        selector = new HtmlAttrSelectorPattern("urlPattern", "a.mnav");
         List<String> contents = selector.select(document);
         assertEquals(6, contents.size());
         assertEquals(true, contents.contains("新闻"));

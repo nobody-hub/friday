@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jayway.jsonpath.ReadContext;
 import com.nobodyhub.friday.crawler.task.common.LinkPattern;
 import com.nobodyhub.friday.crawler.task.common.Request;
-import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelector;
+import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelectorPattern;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -13,10 +13,10 @@ import lombok.EqualsAndHashCode;
  * @author Ryan
  */
 @EqualsAndHashCode(callSuper = true)
-public class JsonLinkPattern extends LinkPattern<ReadContext, JsonAttrSelector> {
+public class JsonLinkPattern extends LinkPattern<ReadContext, JsonAttrSelectorPattern> {
     public JsonLinkPattern(
             @JsonProperty("urlPattern") String urlPattern,
-            @JsonProperty("selector") JsonAttrSelector selector,
+            @JsonProperty("selector") JsonAttrSelectorPattern selector,
             @JsonProperty("request") Request request) {
         super(urlPattern, selector, request);
     }

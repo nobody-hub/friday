@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
 @Getter
 @ToString
 @EqualsAndHashCode
-public abstract class Selector<DOCUMENT> {
+public abstract class SelectorPattern<DOCUMENT> {
     /**
      * Type of content
      */
@@ -37,12 +36,26 @@ public abstract class Selector<DOCUMENT> {
     protected final String selector;
 
     /**
-     * select the interested content from given {@link DOCUMENT}
+     * select the target contents from given {@link DOCUMENT}
      *
-     * @param document
+     * @param url url of current page
+     * @param document the document to be parsed
      * @return
      */
-    public abstract List<String> select(DOCUMENT document);
+    public SelectorResult select(String url, DOCUMENT document) {
+        SelectorResult result = new SelectorResult(this.type, url, this.selector);
+        select(document, result);
+        return result;
+    }
+
+    /**
+     * Fill the {@code Result} from parsing the {@code Document}
+     *
+     * @param document document to be parsed
+     * @param result   the parse result
+     * @return
+     */
+    protected abstract void select(DOCUMENT document, SelectorResult result);
 
     /**
      * whether target url matches this interest

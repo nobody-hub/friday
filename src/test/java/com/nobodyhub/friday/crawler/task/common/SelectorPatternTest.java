@@ -2,7 +2,6 @@ package com.nobodyhub.friday.crawler.task.common;
 
 import com.nobodyhub.friday.crawler.task.SerializationTest;
 import com.nobodyhub.friday.crawler.task.html.HtmlSelector;
-import com.nobodyhub.friday.crawler.task.html.selector.*;
 import com.nobodyhub.friday.crawler.task.json.JsonSelector;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelector;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAudioSelector;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Ryan
  */
-public class SelectorTest implements SerializationTest {
+public class SelectorPatternTest implements SerializationTest {
 
     @Test
     public void testHtmlAttrSelector() throws IOException {
@@ -104,7 +103,7 @@ public class SelectorTest implements SerializationTest {
     @Test
     public void testMatches() {
         String urlPattern = "^stackoverflow\\.*\\d?";
-        Selector selector = new Selector(ContentType.TEXT, urlPattern, "selector") {
+        Selector selectorPattern = new Selector(ContentType.TEXT, urlPattern, "selector") {
             @Override
             public List<String> select(Object o) {
                 return null;

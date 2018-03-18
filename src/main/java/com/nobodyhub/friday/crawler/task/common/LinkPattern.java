@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 @ToString
 @RequiredArgsConstructor
-public abstract class LinkPattern<DOCUMENT, SELECTOR extends Selector<DOCUMENT>> {
+public abstract class LinkPattern<DOCUMENT, SELECTOR extends SelectorPattern<DOCUMENT>> {
     /**
      * url pattern that link need match
      * <p>

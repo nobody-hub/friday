@@ -1,6 +1,6 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
-import com.nobodyhub.friday.crawler.task.html.HtmlSelectorTest;
+import com.nobodyhub.friday.crawler.task.html.HtmlSelectorPatternTest;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Ryan
  */
-public class HtmlUrlSelectorTest extends HtmlSelectorTest {
+public class HtmlUrlSelectorPatternTest extends HtmlSelectorPatternTest {
     @Test
     public void testSelect() {
-        this.selector = new HtmlUrlSelector("urlPattern", "a.mnav");
+        this.selector = new HtmlUrlSelectorPattern("urlPattern", "a.mnav");
         List<String> contents = this.selector.select(document);
         assertEquals(6, contents.size());
         assertEquals(true, contents.contains("http://news.baidu.com"));
