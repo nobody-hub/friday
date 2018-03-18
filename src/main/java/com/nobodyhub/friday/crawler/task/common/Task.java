@@ -35,7 +35,7 @@ import java.util.List;
 public abstract class Task<
         DOCUMENT,
         SELECTOR extends Selector<DOCUMENT>,
-        LINK extends Link<DOCUMENT, ? extends SELECTOR>> {
+        LINK extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
     /**
      * Type of task
      */

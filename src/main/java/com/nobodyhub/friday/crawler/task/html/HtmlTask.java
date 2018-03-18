@@ -17,7 +17,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 public class HtmlTask
-        extends Task<Document, HtmlSelector, HtmlLink> {
+        extends Task<Document, HtmlSelector, HtmlLinkPattern> {
     public HtmlTask(
             String name,
             String description,
@@ -40,7 +40,7 @@ public class HtmlTask
             @JsonProperty("version") String version,
             @JsonProperty("userAgent") String userAgent,
             @JsonProperty("entranceUrls") List<String> entranceUrls,
-            @JsonProperty("htmlLinks") List<HtmlLink> htmlLinks,
+            @JsonProperty("htmlLinks") List<HtmlLinkPattern> htmlLinks,
             @JsonProperty("htmlSelectors") List<HtmlSelector> htmlSelectors) {
         super(TaskType.HTML,
                 name,

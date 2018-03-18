@@ -2,10 +2,10 @@ package com.nobodyhub.friday.crawler.task.common;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.friday.crawler.task.SerializationTest;
-import com.nobodyhub.friday.crawler.task.html.HtmlLink;
+import com.nobodyhub.friday.crawler.task.html.HtmlLinkPattern;
 import com.nobodyhub.friday.crawler.task.html.HtmlTask;
 import com.nobodyhub.friday.crawler.task.html.selector.HtmlUrlSelector;
-import com.nobodyhub.friday.crawler.task.json.JsonLink;
+import com.nobodyhub.friday.crawler.task.json.JsonLinkPattern;
 import com.nobodyhub.friday.crawler.task.json.JsonTask;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelector;
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class TaskTest implements SerializationTest {
         JsonTask task = new JsonTask("name", "description", "version", "userAgent");
         task.addEntranceUrl("entranceUrl");
         task.addSelector(new JsonAttrSelector("urlPattern", "selector"));
-        task.addLink(new JsonLink("urlPattern", new JsonAttrSelector("pattern", "selectpr"), request));
+        task.addLink(new JsonLinkPattern("urlPattern", new JsonAttrSelector("pattern", "selectpr"), request));
         assertEquals(json, objectMapper.writeValueAsString(task));
         assertEquals(task, objectMapper.readValue(json, Task.class));
     }
@@ -44,7 +44,7 @@ public class TaskTest implements SerializationTest {
         HtmlTask task = new HtmlTask("name", "description", "version", "userAgent");
         task.addEntranceUrl("entranceUrl");
         task.addSelector(new HtmlUrlSelector("urlPattern", "selector"));
-        task.addLink(new HtmlLink("urlPattern", new HtmlUrlSelector("pattern", "selectpr"), request));
+        task.addLink(new HtmlLinkPattern("urlPattern", new HtmlUrlSelector("pattern", "selectpr"), request));
         assertEquals(json, objectMapper.writeValueAsString(task));
         assertEquals(task, objectMapper.readValue(json, Task.class));
     }

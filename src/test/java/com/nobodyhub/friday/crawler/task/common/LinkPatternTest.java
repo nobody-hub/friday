@@ -2,9 +2,9 @@ package com.nobodyhub.friday.crawler.task.common;
 
 import com.google.common.collect.Maps;
 import com.nobodyhub.friday.crawler.task.SerializationTest;
-import com.nobodyhub.friday.crawler.task.html.HtmlLink;
+import com.nobodyhub.friday.crawler.task.html.HtmlLinkPattern;
 import com.nobodyhub.friday.crawler.task.html.selector.HtmlUrlSelector;
-import com.nobodyhub.friday.crawler.task.json.JsonLink;
+import com.nobodyhub.friday.crawler.task.json.JsonLinkPattern;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelector;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Ryan
  */
-public class LinkTest implements SerializationTest {
+public class LinkPatternTest implements SerializationTest {
     private Request request;
 
     @Before
@@ -28,17 +28,17 @@ public class LinkTest implements SerializationTest {
     @Test
     public void testHtmlLink() throws IOException {
         String json = "{\"urlPattern\":\"urlPattern\",\"selector\":{\"urlPattern\":\"pattern\",\"selector\":\"selectpr\",\"type\":\"URL\"},\"request\":{\"method\":\"GET\",\"headers\":{},\"requestBody\":\"nobody\"}}";
-        HtmlLink link = new HtmlLink("urlPattern", new HtmlUrlSelector("pattern", "selectpr"), request);
+        HtmlLinkPattern link = new HtmlLinkPattern("urlPattern", new HtmlUrlSelector("pattern", "selectpr"), request);
         assertEquals(json, objectMapper.writeValueAsString(link));
-        assertEquals(link, objectMapper.readValue(json, HtmlLink.class));
+        assertEquals(link, objectMapper.readValue(json, HtmlLinkPattern.class));
     }
 
     @Test
     public void testJsonLink() throws IOException {
         String json = "{\"urlPattern\":\"urlPattern\",\"selector\":{\"urlPattern\":\"pattern\",\"selector\":\"selectpr\",\"type\":\"TEXT\"},\"request\":{\"method\":\"GET\",\"headers\":{},\"requestBody\":\"nobody\"}}";
-        JsonLink link = new JsonLink("urlPattern", new JsonAttrSelector("pattern", "selectpr"), request);
+        JsonLinkPattern link = new JsonLinkPattern("urlPattern", new JsonAttrSelector("pattern", "selectpr"), request);
         assertEquals(json, objectMapper.writeValueAsString(link));
-        assertEquals(link, objectMapper.readValue(json, JsonLink.class));
+        assertEquals(link, objectMapper.readValue(json, JsonLinkPattern.class));
     }
 
 }
