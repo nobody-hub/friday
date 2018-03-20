@@ -28,15 +28,17 @@ public class HtmlAttrSelectorPattern extends HtmlSelectorPattern {
 
     public HtmlAttrSelectorPattern(
             @JsonProperty("urlPattern") String urlPattern,
-            @JsonProperty("selector") String selector) {
-        super(ContentType.TEXT, urlPattern, selector);
+            @JsonProperty("selectors") List<String> selectors) {
+        super(ContentType.TEXT, urlPattern, selectors);
         this.attributes = Lists.newArrayList();
     }
 
     @Override
-    protected void select(Document document, SelectorResult result) {
+    protected List<SelectorResult> select(String url, Document document, String selector) {
+        List<SelectorResult> results = Lists.newArrayList();
         Elements elements = document.select(selector);
         for (Element element : elements) {
+            SelectorResult result = new SelectorResult(this.type, url, selector);
             if (this.attributes.isEmpty()) {
                 result.addAttr(HTML_TEXT, element.text());
             } else {
@@ -44,7 +46,9 @@ public class HtmlAttrSelectorPattern extends HtmlSelectorPattern {
                     result.addAttr(attr, element.attr(attr));
                 }
             }
+            results.add(result);
         }
+        return results;
     }
 
     public void addAttribute(String attribute) {

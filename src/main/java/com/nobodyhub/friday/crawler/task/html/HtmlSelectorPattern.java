@@ -8,6 +8,8 @@ import com.nobodyhub.friday.crawler.task.html.selector.*;
 import lombok.EqualsAndHashCode;
 import org.jsoup.nodes.Document;
 
+import java.util.List;
+
 /**
  * Links in HTML
  *
@@ -28,7 +30,7 @@ import org.jsoup.nodes.Document;
 })
 @EqualsAndHashCode(callSuper = true)
 public abstract class HtmlSelectorPattern extends SelectorPattern<Document> {
-    public HtmlSelectorPattern(ContentType type, String urlPattern, String selector) {
-        super(type, urlPattern, selector);
+    public HtmlSelectorPattern(ContentType type, String urlPattern, List<String> selectors) {
+        super(type, urlPattern, selectors);
     }
 }

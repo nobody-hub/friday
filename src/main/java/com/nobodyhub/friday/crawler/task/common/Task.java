@@ -83,10 +83,12 @@ public abstract class Task<
      * @param document
      * @return
      */
-    public List<String> parseLink(DOCUMENT document) {
+    public List<String> parseLink(String url, DOCUMENT document) {
         List<String> urls = Lists.newArrayList();
         for (LINKPATTERN pattern : links) {
-            urls.addAll(pattern.parse(document));
+            if (pattern.matches(url)) {
+                urls.addAll(pattern.parse(url, document));
+            }
         }
         return urls;
     }
@@ -101,7 +103,7 @@ public abstract class Task<
         List<SelectorResult> values = Lists.newArrayList();
         for (SELECTOR target : selectors) {
             if (target.matches(url)) {
-                values.add(target.select(url, document));
+                values.addAll(target.select(url, document));
             }
         }
         return values;

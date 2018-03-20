@@ -1,11 +1,13 @@
 package com.nobodyhub.friday.crawler.task.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -32,30 +34,33 @@ public abstract class SelectorPattern<DOCUMENT> {
      * @see <a href="https://www.w3schools.com/cssref/css_selectors.asp">CSS Selector for HTML</a>
      * @see <a href="https://github.com/json-path/JsonPath">JsonPath for JSON</a>
      */
-    @JsonProperty("selector")
-    protected final String selector;
+    @JsonProperty("selectors")
+    protected final List<String> selectors;
 
     /**
      * select the target contents from given {@link DOCUMENT}
      *
-     * @param url url of current page
+     * @param url      url of current page
      * @param document the document to be parsed
      * @return
      */
-    public SelectorResult select(String url, DOCUMENT document) {
-        SelectorResult result = new SelectorResult(this.type, url, this.selector);
-        select(document, result);
-        return result;
+    public List<SelectorResult> select(String url, DOCUMENT document) {
+        List<SelectorResult> results = Lists.newArrayList();
+        for (String selector : selectors) {
+            results.addAll(select(url, document, selector));
+        }
+        return results;
     }
 
     /**
-     * Fill the {@code Result} from parsing the {@code Document}
+     * select the result for each selector
      *
-     * @param document document to be parsed
-     * @param result   the parse result
+     * @param url
+     * @param document
+     * @param selector
      * @return
      */
-    protected abstract void select(DOCUMENT document, SelectorResult result);
+    protected abstract List<SelectorResult> select(String url, DOCUMENT document, String selector);
 
     /**
      * whether target url matches this interest

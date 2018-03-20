@@ -1,6 +1,7 @@
 package com.nobodyhub.friday.crawler.task.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -55,11 +56,17 @@ public abstract class LinkPattern<DOCUMENT, SELECTOR extends SelectorPattern<DOC
     /**
      * get the links for parsing contents
      *
+     * @param url
      * @param document
      * @return
      */
-    public List<String> parse(DOCUMENT document) {
-        return selector.select(document);
+    public List<String> parse(String url, DOCUMENT document) {
+        List<SelectorResult> results = selector.select(url, document);
+        List<String> urls = Lists.newArrayList();
+        for (SelectorResult result : results) {
+            urls.addAll(result.getAttributeMap().values());
+        }
+        return urls;
     }
 
 }

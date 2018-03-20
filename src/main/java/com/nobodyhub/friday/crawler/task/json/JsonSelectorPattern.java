@@ -2,6 +2,7 @@ package com.nobodyhub.friday.crawler.task.json;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.common.collect.Lists;
 import com.jayway.jsonpath.ReadContext;
 import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.common.SelectorPattern;
@@ -11,6 +12,10 @@ import com.nobodyhub.friday.crawler.task.json.selector.JsonAudioSelectorPattern;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonImageSelectorPattern;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonVideoSelectorPattern;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
+
+import static com.nobodyhub.friday.crawler.task.common.SelectorResult.JSON_VALUE;
 
 /**
  * @author Ryan
@@ -30,21 +35,29 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public abstract class JsonSelectorPattern extends SelectorPattern<ReadContext> {
 
-    public JsonSelectorPattern(ContentType type, String urlPattern, String selector) {
-        super(type, urlPattern, selector);
+    public JsonSelectorPattern(ContentType type, String urlPattern, List<String> selectors) {
+        super(type, urlPattern, selectors);
     }
 
     /**
      * Prefix {@code $..} added to ensure the path will return a list
      *
-     * @param document document to be parsed
-     * @param result   the parse result
+     * @param url
+     * @param document
+     * @param selector
      * @return
      * @see <a href="https://github.com/json-path/JsonPath#what-is-returned-when">what-is-returned-when</a>
      */
     @Override
-    protected void select(ReadContext document, SelectorResult result) {
-        //TODO: handle if the read returns a list
-        result.addAttr(SelectorResult.JSON_VALUE, document.read("$.." + selector));
+    protected List<SelectorResult> select(String url, ReadContext document, String selector) {
+        List<String> values = document.read("$.." + selector);
+        List<SelectorResult> results = Lists.newArrayList();
+        int i = 0;
+        for (String value : values) {
+            SelectorResult result = new SelectorResult(this.type, url, selector);
+            result.addAttr(JSON_VALUE + i, value);
+            i++;
+        }
+        return results;
     }
 }
