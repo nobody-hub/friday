@@ -40,6 +40,7 @@ public class HtmlUrlSelectorPattern extends HtmlSelectorPattern {
         for (Element element : elements) {
             SelectorResult result = new SelectorResult(this.type, url, selector);
             result.addAttr(HTML_HREF, element.absUrl(HTML_HREF));
+            results.add(result);
         }
         return results;
     }

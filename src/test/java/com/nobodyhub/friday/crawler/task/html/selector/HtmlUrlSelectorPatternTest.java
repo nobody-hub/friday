@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.nobodyhub.friday.crawler.task.common.SelectorResult.HTML_HREF;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,12 +19,12 @@ public class HtmlUrlSelectorPatternTest extends HtmlSelectorPatternTest {
         this.selector = new HtmlUrlSelectorPattern("urlPattern", Lists.newArrayList("a.mnav"));
         List<SelectorResult> contents = this.selector.select("http://www.baidu.com/", document);
         assertEquals(6, contents.size());
-        //TODO
-//        assertEquals(true, contents.contains("http://news.baidu.com"));
-//        assertEquals(true, contents.contains("http://www.hao123.com"));
-//        assertEquals(true, contents.contains("http://map.baidu.com"));
-//        assertEquals(true, contents.contains("http://v.baidu.com"));
-//        assertEquals(true, contents.contains("http://tieba.baidu.com"));
-//        assertEquals(true, contents.contains("http://xueshu.baidu.com"));
+        List<String> values = convertToAttrList(contents, HTML_HREF);
+        assertEquals(true, values.contains("http://news.baidu.com"));
+        assertEquals(true, values.contains("http://www.hao123.com"));
+        assertEquals(true, values.contains("http://map.baidu.com"));
+        assertEquals(true, values.contains("http://v.baidu.com"));
+        assertEquals(true, values.contains("http://tieba.baidu.com"));
+        assertEquals(true, values.contains("http://xueshu.baidu.com"));
     }
 }

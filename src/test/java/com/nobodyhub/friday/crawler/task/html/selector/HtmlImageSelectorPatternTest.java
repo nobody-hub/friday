@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.nobodyhub.friday.crawler.task.common.SelectorResult.HTML_SRC;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,7 +19,7 @@ public class HtmlImageSelectorPatternTest extends HtmlSelectorPatternTest {
         this.selector = new HtmlImageSelectorPattern("urlPattern", Lists.newArrayList("img[hidefocus=true]"));
         List<SelectorResult> contents = this.selector.select("http://www.baidu.com/", document);
         assertEquals(1, contents.size());
-        //TODO
-//        assertEquals(true, contents.contains("http://www.baidu.com/img/bd_logo1.png"));
+        List<String> values = convertToAttrList(contents, HTML_SRC);
+        assertEquals(true, values.contains("http://www.baidu.com/img/bd_logo1.png"));
     }
 }

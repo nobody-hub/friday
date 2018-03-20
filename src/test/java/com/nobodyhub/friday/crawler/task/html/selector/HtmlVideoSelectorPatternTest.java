@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.nobodyhub.friday.crawler.task.common.SelectorResult.HTML_SRC;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,8 +19,8 @@ public class HtmlVideoSelectorPatternTest extends HtmlSelectorPatternTest {
         this.selector = new HtmlVideoSelectorPattern("urlPattern", Lists.newArrayList("video.selected"));
         List<SelectorResult> contents = this.selector.select("http://nobodyhub.com/", document);
         assertEquals(2, contents.size());
-        //TODO
-//        assertEquals(true, contents.contains("http://nobodyhub.com/selector/movie.mp4"));
-//        assertEquals(true, contents.contains("http://nobodyhub.com/selector/movie.ogg"));
+        List<String> values = convertToAttrList(contents, HTML_SRC);
+        assertEquals(true, values.contains("http://nobodyhub.com/selector/movie.mp4"));
+        assertEquals(true, values.contains("http://nobodyhub.com/selector/movie.ogg"));
     }
 }

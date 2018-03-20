@@ -41,6 +41,7 @@ public class HtmlAudioSelectorPattern extends HtmlSelectorPattern {
         for (Element element : elements) {
             SelectorResult result = new SelectorResult(this.type, url, selector);
             result.addAttr(HTML_SRC, StringUtil.resolve(element.baseUri(), element.attr(HTML_SRC)));
+            results.add(result);
         }
         return results;
     }

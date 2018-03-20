@@ -56,6 +56,7 @@ public abstract class JsonSelectorPattern extends SelectorPattern<ReadContext> {
         for (String value : values) {
             SelectorResult result = new SelectorResult(this.type, url, selector);
             result.addAttr(JSON_VALUE + i, value);
+            results.add(result);
             i++;
         }
         return results;
