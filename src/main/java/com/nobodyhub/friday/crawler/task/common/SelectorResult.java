@@ -1,5 +1,6 @@
 package com.nobodyhub.friday.crawler.task.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import lombok.Getter;
@@ -47,7 +48,13 @@ public class SelectorResult {
      */
     protected final Map<String, String> attributeMap = Maps.newHashMap();
 
+    @JsonIgnore
     public void addAttr(String attr, String value) {
         attributeMap.put(attr, value);
+    }
+
+    @JsonIgnore
+    public String getAttr(String attr) {
+        return attributeMap.get(attr);
     }
 }
