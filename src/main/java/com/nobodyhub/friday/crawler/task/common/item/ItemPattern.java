@@ -1,7 +1,8 @@
-package com.nobodyhub.friday.crawler.task.common;
+package com.nobodyhub.friday.crawler.task.common.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.task.common.ContentType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 @Getter
 @ToString
 @EqualsAndHashCode
-public abstract class SelectorPattern<DOCUMENT> {
+public abstract class ItemPattern<DOCUMENT> {
     /**
      * Type of content
      */
@@ -44,8 +45,8 @@ public abstract class SelectorPattern<DOCUMENT> {
      * @param document the document to be parsed
      * @return
      */
-    public List<SelectorResult> select(String url, DOCUMENT document) {
-        List<SelectorResult> results = Lists.newArrayList();
+    public List<Item> select(String url, DOCUMENT document) {
+        List<Item> results = Lists.newArrayList();
         for (String selector : selectors) {
             results.addAll(select(url, document, selector));
         }
@@ -60,7 +61,7 @@ public abstract class SelectorPattern<DOCUMENT> {
      * @param selector
      * @return
      */
-    protected abstract List<SelectorResult> select(String url, DOCUMENT document, String selector);
+    protected abstract List<Item> select(String url, DOCUMENT document, String selector);
 
     /**
      * whether target url matches this interest

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.common.item.ItemPattern;
 import com.nobodyhub.friday.crawler.task.html.HtmlTask;
 import com.nobodyhub.friday.crawler.task.json.JsonTask;
 import lombok.Data;
@@ -34,7 +36,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class Task<
         DOCUMENT,
-        SELECTOR extends SelectorPattern<DOCUMENT>,
+        SELECTOR extends ItemPattern<DOCUMENT>,
         LINKPATTERN extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
     /**
      * Type of task
@@ -99,8 +101,8 @@ public abstract class Task<
      * @param document
      * @return
      */
-    public List<SelectorResult> parseContent(String url, DOCUMENT document) {
-        List<SelectorResult> values = Lists.newArrayList();
+    public List<Item> parseContent(String url, DOCUMENT document) {
+        List<Item> values = Lists.newArrayList();
         for (SELECTOR target : selectors) {
             if (target.matches(url)) {
                 values.addAll(target.select(url, document));

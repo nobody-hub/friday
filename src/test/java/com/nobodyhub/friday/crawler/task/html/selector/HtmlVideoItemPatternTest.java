@@ -1,23 +1,23 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.task.common.SelectorResult;
-import com.nobodyhub.friday.crawler.task.html.HtmlSelectorPatternTest;
+import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.html.HtmlItemPatternTest;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.nobodyhub.friday.crawler.task.common.SelectorResult.HTML_SRC;
+import static com.nobodyhub.friday.crawler.task.common.item.Item.HTML_SRC;
 import static org.junit.Assert.assertEquals;
 
 /**
  * @author Ryan
  */
-public class HtmlVideoSelectorPatternTest extends HtmlSelectorPatternTest {
+public class HtmlVideoItemPatternTest extends HtmlItemPatternTest {
     @Test
     public void testSelect() {
-        this.selector = new HtmlVideoSelectorPattern("urlPattern", Lists.newArrayList("video.selected"));
-        List<SelectorResult> contents = this.selector.select("http://nobodyhub.com/", document);
+        this.selector = new HtmlVideoItemPattern("urlPattern", Lists.newArrayList("video.selected"));
+        List<Item> contents = this.selector.select("http://nobodyhub.com/", document);
         assertEquals(2, contents.size());
         List<String> values = convertToAttrList(contents, HTML_SRC);
         assertEquals(true, values.contains("http://nobodyhub.com/selector/movie.mp4"));

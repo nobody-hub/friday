@@ -2,25 +2,25 @@ package com.nobodyhub.friday.crawler.task.html.selector;
 
 import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.task.common.ContentType;
-import com.nobodyhub.friday.crawler.task.common.SelectorResult;
-import com.nobodyhub.friday.crawler.task.html.HtmlSelectorPatternTest;
+import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.html.HtmlItemPatternTest;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.nobodyhub.friday.crawler.task.common.SelectorResult.HTML_TEXT;
+import static com.nobodyhub.friday.crawler.task.common.item.Item.HTML_TEXT;
 import static org.junit.Assert.assertEquals;
 
 /**
  * @author Ryan
  */
-public class HtmlAttrSelectorPatternTest extends HtmlSelectorPatternTest {
+public class HtmlAttrItemPatternTest extends HtmlItemPatternTest {
 
     @Test
     public void testSelectWithAttr() {
-        selector = new HtmlAttrSelectorPattern("urlPattern", Lists.newArrayList("a.mnav"));
-        ((HtmlAttrSelectorPattern) selector).addAttribute("name");
-        List<SelectorResult> contents = selector.select("http://www.baidu.com", document);
+        selector = new HtmlAttrItemPattern("urlPattern", Lists.newArrayList("a.mnav"));
+        ((HtmlAttrItemPattern) selector).addAttribute("name");
+        List<Item> contents = selector.select("http://www.baidu.com", document);
         assertEquals(6, contents.size());
         List<String> values = convertToAttrList(contents, "name");
         assertEquals("a.mnav", contents.get(0).getSelector());
@@ -36,8 +36,8 @@ public class HtmlAttrSelectorPatternTest extends HtmlSelectorPatternTest {
 
     @Test
     public void testSelectWithoutAttr() {
-        selector = new HtmlAttrSelectorPattern("urlPattern", Lists.newArrayList("a.mnav"));
-        List<SelectorResult> contents = selector.select("http://www.baidu.com", document);
+        selector = new HtmlAttrItemPattern("urlPattern", Lists.newArrayList("a.mnav"));
+        List<Item> contents = selector.select("http://www.baidu.com", document);
         assertEquals(6, contents.size());
         List<String> values = convertToAttrList(contents, HTML_TEXT);
         assertEquals("a.mnav", contents.get(0).getSelector());

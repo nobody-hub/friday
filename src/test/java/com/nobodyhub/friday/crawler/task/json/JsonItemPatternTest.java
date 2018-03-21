@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Resources;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
-import com.nobodyhub.friday.crawler.task.common.SelectorResult;
-import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrSelectorPattern;
+import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrItemPattern;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Ryan
  */
-public class JsonSelectorPatternTest {
+public class JsonItemPatternTest {
     protected ReadContext document;
 
     @Before
@@ -28,8 +28,8 @@ public class JsonSelectorPatternTest {
 
     @Test
     public void testSelect() {
-        JsonAttrSelectorPattern selector = new JsonAttrSelectorPattern("urlPattern", Lists.newArrayList("paging.next", "data[0].actor.url"));
-        List<SelectorResult> contents = selector.select("http://www.zhihu.com", document);
+        JsonAttrItemPattern selector = new JsonAttrItemPattern("urlPattern", Lists.newArrayList("paging.next", "data[0].actor.url"));
+        List<Item> contents = selector.select("http://www.zhihu.com", document);
         assertEquals(2, contents.size());
         List<String> values = convertToAttrList(contents);
         assertEquals(true, values.contains("https://www.zhihu.com/api/v4/members/zhang-jia-wei-64/activities?limit=8&after_id=1461208563&desktop=True"));
@@ -37,9 +37,9 @@ public class JsonSelectorPatternTest {
 
     }
 
-    protected List<String> convertToAttrList(List<SelectorResult> results) {
+    protected List<String> convertToAttrList(List<Item> results) {
         List<String> values = Lists.newArrayList();
-        for (SelectorResult result : results) {
+        for (Item result : results) {
             values.addAll(result.getAttributeMap().values());
         }
         return values;

@@ -3,7 +3,7 @@ package com.nobodyhub.friday.crawler.task.html;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.nobodyhub.friday.crawler.task.common.ContentType;
-import com.nobodyhub.friday.crawler.task.common.SelectorPattern;
+import com.nobodyhub.friday.crawler.task.common.item.ItemPattern;
 import com.nobodyhub.friday.crawler.task.html.selector.*;
 import lombok.EqualsAndHashCode;
 import org.jsoup.nodes.Document;
@@ -22,15 +22,15 @@ import java.util.List;
         visible = true
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = HtmlAttrSelectorPattern.class, name = "TEXT"),
-        @JsonSubTypes.Type(value = HtmlImageSelectorPattern.class, name = "IMAGE"),
-        @JsonSubTypes.Type(value = HtmlAudioSelectorPattern.class, name = "AUDIO"),
-        @JsonSubTypes.Type(value = HtmlVideoSelectorPattern.class, name = "VIDEO"),
-        @JsonSubTypes.Type(value = HtmlUrlSelectorPattern.class, name = "URL")
+        @JsonSubTypes.Type(value = HtmlAttrItemPattern.class, name = "TEXT"),
+        @JsonSubTypes.Type(value = HtmlImageItemPattern.class, name = "IMAGE"),
+        @JsonSubTypes.Type(value = HtmlAudioItemPattern.class, name = "AUDIO"),
+        @JsonSubTypes.Type(value = HtmlVideoItemPattern.class, name = "VIDEO"),
+        @JsonSubTypes.Type(value = HtmlUrlItemPattern.class, name = "URL")
 })
 @EqualsAndHashCode(callSuper = true)
-public abstract class HtmlSelectorPattern extends SelectorPattern<Document> {
-    public HtmlSelectorPattern(ContentType type, String urlPattern, List<String> selectors) {
+public abstract class HtmlItemPattern extends ItemPattern<Document> {
+    public HtmlItemPattern(ContentType type, String urlPattern, List<String> selectors) {
         super(type, urlPattern, selectors);
     }
 }

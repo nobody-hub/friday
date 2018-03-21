@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.io.Resources;
-import com.nobodyhub.friday.crawler.task.common.SelectorResult;
+import com.nobodyhub.friday.crawler.task.common.item.Item;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * @author Ryan
  */
-public abstract class HtmlSelectorPatternTest {
+public abstract class HtmlItemPatternTest {
     protected Document document;
-    protected HtmlSelectorPattern selector;
+    protected HtmlItemPattern selector;
 
     @Before
     public void setup() throws URISyntaxException, IOException {
@@ -27,11 +27,11 @@ public abstract class HtmlSelectorPatternTest {
         document.setBaseUri("http://nobodyhub.com/selector/test");
     }
 
-    protected List<String> convertToAttrList(List<SelectorResult> results, final String attr) {
-        return Lists.transform(results, new Function<SelectorResult, String>() {
+    protected List<String> convertToAttrList(List<Item> results, final String attr) {
+        return Lists.transform(results, new Function<Item, String>() {
             @Nullable
             @Override
-            public String apply(@Nullable SelectorResult input) {
+            public String apply(@Nullable Item input) {
                 return input.getAttr(attr);
             }
         });

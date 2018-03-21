@@ -16,7 +16,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 public class JsonTask
-        extends Task<ReadContext, JsonSelectorPattern, JsonLinkPattern> {
+        extends Task<ReadContext, JsonItemPattern, JsonLinkPattern> {
     public JsonTask(
             String name,
             String description,
@@ -40,7 +40,7 @@ public class JsonTask
             @JsonProperty("userAgent") String userAgent,
             @JsonProperty("entranceUrls") List<Link> entranceUrls,
             @JsonProperty("htmlLinks") List<JsonLinkPattern> jsoNLinks,
-            @JsonProperty("htmlSelectors") List<JsonSelectorPattern> jsonSelectors) {
+            @JsonProperty("htmlSelectors") List<JsonItemPattern> jsonSelectors) {
         super(TaskType.JSON,
                 name,
                 description,
