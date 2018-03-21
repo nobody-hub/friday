@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.task.common.item.Item;
 import com.nobodyhub.friday.crawler.task.common.item.ItemPattern;
+import com.nobodyhub.friday.crawler.task.common.link.Link;
+import com.nobodyhub.friday.crawler.task.common.link.LinkPattern;
 import com.nobodyhub.friday.crawler.task.html.HtmlTask;
 import com.nobodyhub.friday.crawler.task.json.JsonTask;
 import lombok.Data;

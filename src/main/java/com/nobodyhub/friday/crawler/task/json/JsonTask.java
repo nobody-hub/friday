@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.jayway.jsonpath.ReadContext;
-import com.nobodyhub.friday.crawler.task.common.Link;
 import com.nobodyhub.friday.crawler.task.common.Task;
 import com.nobodyhub.friday.crawler.task.common.TaskType;
+import com.nobodyhub.friday.crawler.task.common.link.Link;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;

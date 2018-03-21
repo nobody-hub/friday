@@ -2,8 +2,8 @@ package com.nobodyhub.friday.crawler.task.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jayway.jsonpath.ReadContext;
-import com.nobodyhub.friday.crawler.task.common.LinkPattern;
-import com.nobodyhub.friday.crawler.task.common.Request;
+import com.nobodyhub.friday.crawler.task.common.link.LinkPattern;
+import com.nobodyhub.friday.crawler.task.common.link.Request;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrItemPattern;
 import lombok.EqualsAndHashCode;
 
