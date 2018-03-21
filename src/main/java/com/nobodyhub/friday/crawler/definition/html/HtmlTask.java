@@ -9,6 +9,7 @@ import com.nobodyhub.friday.crawler.definition.common.task.TaskType;
 import lombok.EqualsAndHashCode;
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -51,5 +52,10 @@ public class HtmlTask
                 entranceUrls,
                 htmlLinks,
                 htmlSelectors);
+    }
+
+    @Override
+    public Document connect(Link link) throws IOException {
+        return link.getRequest().execute(link.getUrl()).parse();
     }
 }

@@ -15,6 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -134,4 +135,13 @@ public abstract class Task<
     public void addLink(LINKPATTERN link) {
         this.links.add(link);
     }
+
+    /**
+     * Read {@link DOCUMENT} from {@link Link}
+     *
+     * @param link
+     * @return
+     * @throws IOException
+     */
+    public abstract DOCUMENT connect(Link link) throws IOException;
 }
