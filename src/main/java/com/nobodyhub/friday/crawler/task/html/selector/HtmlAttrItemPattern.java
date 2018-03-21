@@ -2,8 +2,8 @@ package com.nobodyhub.friday.crawler.task.html.selector;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.common.item.ItemType;
 import com.nobodyhub.friday.crawler.task.html.HtmlItemPattern;
 import lombok.EqualsAndHashCode;
 import org.jsoup.nodes.Document;
@@ -29,7 +29,7 @@ public class HtmlAttrItemPattern extends HtmlItemPattern {
     public HtmlAttrItemPattern(
             @JsonProperty("urlPattern") String urlPattern,
             @JsonProperty("selectors") List<String> selectors) {
-        super(ContentType.TEXT, urlPattern, selectors);
+        super(ItemType.TEXT, urlPattern, selectors);
         this.attributes = Lists.newArrayList();
     }
 

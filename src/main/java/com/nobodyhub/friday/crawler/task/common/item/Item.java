@@ -3,7 +3,6 @@ package com.nobodyhub.friday.crawler.task.common.item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
-import com.nobodyhub.friday.crawler.task.common.ContentType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +29,7 @@ public class Item {
      * Type of content
      */
     @JsonProperty("type")
-    protected final ContentType type;
+    protected final ItemType type;
 
     /**
      * Url of target page

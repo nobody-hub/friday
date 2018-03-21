@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
 import com.jayway.jsonpath.ReadContext;
-import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.common.item.Item;
 import com.nobodyhub.friday.crawler.task.common.item.ItemPattern;
+import com.nobodyhub.friday.crawler.task.common.item.ItemType;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAttrItemPattern;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonAudioItemPattern;
 import com.nobodyhub.friday.crawler.task.json.selector.JsonImageItemPattern;
@@ -35,7 +35,7 @@ import static com.nobodyhub.friday.crawler.task.common.item.Item.JSON_VALUE;
 @EqualsAndHashCode(callSuper = true)
 public abstract class JsonItemPattern extends ItemPattern<ReadContext> {
 
-    public JsonItemPattern(ContentType type, String urlPattern, List<String> selectors) {
+    public JsonItemPattern(ItemType type, String urlPattern, List<String> selectors) {
         super(type, urlPattern, selectors);
     }
 

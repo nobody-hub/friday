@@ -1,11 +1,11 @@
-package com.nobodyhub.friday.crawler.task.common;
+package com.nobodyhub.friday.crawler.task.common.item;
 
 /**
  * Types of Interested Contents
  *
  * @author Ryan
  */
-public enum ContentType {
+public enum ItemType {
     /**
      * Absolute URL
      * the difference with {@link this#TEXT} is the value of {@link this#URL} might be a base URL + value of {@link this#TEXT}

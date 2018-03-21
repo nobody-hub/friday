@@ -2,7 +2,6 @@ package com.nobodyhub.friday.crawler.task.common.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.task.common.ContentType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public abstract class ItemPattern<DOCUMENT> {
      * Type of content
      */
     @JsonProperty("type")
-    protected final ContentType type;
+    protected final ItemType type;
     /**
      * Url REGEX pattern that restrict the target
      */

@@ -1,8 +1,8 @@
 package com.nobodyhub.friday.crawler.task.html.selector;
 
 import com.google.common.collect.Lists;
-import com.nobodyhub.friday.crawler.task.common.ContentType;
 import com.nobodyhub.friday.crawler.task.common.item.Item;
+import com.nobodyhub.friday.crawler.task.common.item.ItemType;
 import com.nobodyhub.friday.crawler.task.html.HtmlItemPatternTest;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class HtmlAttrItemPatternTest extends HtmlItemPatternTest {
         List<String> values = convertToAttrList(contents, "name");
         assertEquals("a.mnav", contents.get(0).getSelector());
         assertEquals("http://www.baidu.com", contents.get(0).getUrl());
-        assertEquals(ContentType.TEXT, contents.get(0).getType());
+        assertEquals(ItemType.TEXT, contents.get(0).getType());
         assertEquals(true, values.contains("tj_trnews"));
         assertEquals(true, values.contains("tj_trhao123"));
         assertEquals(true, values.contains("tj_trmap"));
@@ -42,7 +42,7 @@ public class HtmlAttrItemPatternTest extends HtmlItemPatternTest {
         List<String> values = convertToAttrList(contents, HTML_TEXT);
         assertEquals("a.mnav", contents.get(0).getSelector());
         assertEquals("http://www.baidu.com", contents.get(0).getUrl());
-        assertEquals(ContentType.TEXT, contents.get(0).getType());
+        assertEquals(ItemType.TEXT, contents.get(0).getType());
         assertEquals(true, values.contains("新闻"));
         assertEquals(true, values.contains("hao123"));
         assertEquals(true, values.contains("地图"));
