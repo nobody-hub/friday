@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.task.common;
+package com.nobodyhub.friday.crawler.task.common.task;
 
 /**
  * @author Ryan
