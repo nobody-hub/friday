@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.jsoup.Connection;
 
 import java.io.IOException;
 import java.util.List;
@@ -88,14 +89,20 @@ public abstract class Task<
      * @param document
      * @return
      */
-    public List<String> parseLink(String url, DOCUMENT document) {
+    public List<Link> parseLink(Link link, DOCUMENT document, Connection.Response response) {
+        //parse <a>
         List<String> urls = Lists.newArrayList();
+        String baseUrl = link.getUrl();
         for (LINKPATTERN pattern : links) {
-            if (pattern.matches(url)) {
-                urls.addAll(pattern.parse(url, document));
+            if (pattern.matches(baseUrl)) {
+                urls.addAll(pattern.parse(link.getUrl(), document));
             }
         }
-        return urls;
+        List<Link> newLinks = Lists.newArrayList();
+        for (String url : urls) {
+            newLinks.add(new Link(url, link.getRequest().update(response)));
+        }
+        return newLinks;
     }
 
     /**
@@ -106,9 +113,9 @@ public abstract class Task<
      */
     public List<Item> parseContent(String url, DOCUMENT document) {
         List<Item> values = Lists.newArrayList();
-        for (SELECTOR target : selectors) {
-            if (target.matches(url)) {
-                values.addAll(target.select(url, document));
+        for (SELECTOR pattern : selectors) {
+            if (pattern.matches(url)) {
+                values.addAll(pattern.select(url, document));
             }
         }
         return values;
@@ -137,11 +144,40 @@ public abstract class Task<
     }
 
     /**
-     * Read {@link DOCUMENT} from {@link Link}
+     * Read response from {@link Link}
      *
      * @param link
      * @return
      * @throws IOException
      */
-    public abstract DOCUMENT connect(Link link) throws IOException;
+    public Connection.Response connect(Link link) throws IOException {
+        return link.getRequest().execute(link.getUrl());
+    }
+
+    /**
+     * Execute task:
+     * 1. query contents from {@code startLink}
+     * 2. parse the new {@link Link}s into {@code links}
+     * 3. parse target {@link Item}s into {@code items}
+     *
+     * @param startLink
+     * @param links
+     * @param items
+     */
+    public void execute(Link startLink, List<Link> links, List<Item> items) throws IOException {
+        Connection.Response response = connect(startLink);
+        DOCUMENT document = extract(response);
+        links.addAll(parseLink(startLink, document, response));
+        items.addAll(parseContent(startLink.getUrl(), document));
+    }
+
+
+    /**
+     * Extract {@link DOCUMENT} from {@code response}
+     *
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    public abstract DOCUMENT extract(Connection.Response response) throws IOException;
 }

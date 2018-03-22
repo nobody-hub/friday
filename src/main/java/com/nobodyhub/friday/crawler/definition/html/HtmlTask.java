@@ -3,10 +3,12 @@ package com.nobodyhub.friday.crawler.definition.html;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
+import com.nobodyhub.friday.crawler.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.definition.common.link.Link;
 import com.nobodyhub.friday.crawler.definition.common.task.Task;
 import com.nobodyhub.friday.crawler.definition.common.task.TaskType;
 import lombok.EqualsAndHashCode;
+import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -55,7 +57,15 @@ public class HtmlTask
     }
 
     @Override
-    public Document connect(Link link) throws IOException {
-        return link.getRequest().execute(link.getUrl()).parse();
+    public void execute(Link startLink, List<Link> links, List<Item> items) throws IOException {
+        Connection.Response response = connect(startLink);
+        Document document = response.parse();
+        links.addAll(parseLink(startLink, document, response));
+        items.addAll(parseContent(startLink.getUrl(), document));
+    }
+
+    @Override
+    public Document extract(Connection.Response response) throws IOException {
+        return response.parse();
     }
 }

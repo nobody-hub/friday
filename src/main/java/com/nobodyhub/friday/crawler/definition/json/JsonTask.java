@@ -9,8 +9,8 @@ import com.nobodyhub.friday.crawler.definition.common.link.Link;
 import com.nobodyhub.friday.crawler.definition.common.task.Task;
 import com.nobodyhub.friday.crawler.definition.common.task.TaskType;
 import lombok.EqualsAndHashCode;
+import org.jsoup.Connection;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -54,7 +54,7 @@ public class JsonTask
     }
 
     @Override
-    public ReadContext connect(Link link) throws IOException {
-        return JsonPath.parse(link.getRequest().execute(link.getUrl()).body());
+    public ReadContext extract(Connection.Response response) {
+        return JsonPath.parse(response.body());
     }
 }
