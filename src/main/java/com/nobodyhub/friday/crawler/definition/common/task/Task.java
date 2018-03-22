@@ -1,5 +1,6 @@
 package com.nobodyhub.friday.crawler.definition.common.task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -17,7 +18,9 @@ import lombok.ToString;
 import org.jsoup.Connection;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Definition of a crawler task
@@ -82,6 +85,12 @@ public abstract class Task<
      */
     @JsonProperty("selectors")
     protected final List<SELECTOR> selectors;
+
+    /**
+     * the limits of number of {@link Link}s to be processed
+     */
+    protected BigInteger limit = BigInteger.valueOf(-1L);
+    protected AtomicReference<BigInteger> limitCount = new AtomicReference<>(BigInteger.ZERO);
 
     /**
      * Get futher links
@@ -169,6 +178,7 @@ public abstract class Task<
         DOCUMENT document = extract(response);
         links.addAll(parseLink(startLink, document, response));
         items.addAll(parseContent(startLink.getUrl(), document));
+        increaseCount();
     }
 
 
@@ -180,4 +190,14 @@ public abstract class Task<
      * @throws IOException
      */
     public abstract DOCUMENT extract(Connection.Response response) throws IOException;
+
+    protected void increaseCount() {
+        this.limitCount.getAndAccumulate(BigInteger.ONE, (previous, toAdd) -> previous.add(toAdd));
+    }
+
+    @JsonIgnore
+    public boolean isFinish() {
+        return limit.compareTo(BigInteger.valueOf(-1L)) != 0
+                && limit.compareTo(limitCount.get()) <= 0;
+    }
 }

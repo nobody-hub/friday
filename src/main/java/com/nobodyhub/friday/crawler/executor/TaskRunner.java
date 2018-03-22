@@ -35,7 +35,7 @@ public class TaskRunner<T extends Task> implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try (KafkaConsumer<String, Link> consumer = kafkaClient.createConsumer()) {
-            while (!Thread.currentThread().isInterrupted()) {
+            while (!Thread.currentThread().isInterrupted() && !task.isFinish()) {
                 ConsumerRecords<String, Link> records = consumer.poll(100);
                 //commit immediately after consume, regardless whether the records will be processed successfully or not
                 consumer.commitSync();
