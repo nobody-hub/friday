@@ -23,7 +23,7 @@ public abstract class HtmlItemPatternTest {
 
     @Before
     public void setup() throws URISyntaxException, IOException {
-        document = Jsoup.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/task/html/selector.html"), Charsets.UTF_8));
+        document = Jsoup.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/core/definition/html/selector.html"), Charsets.UTF_8));
         document.setBaseUri("http://nobodyhub.com/selector/test");
     }
 

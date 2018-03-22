@@ -23,7 +23,7 @@ public class JsonItemPatternTest {
 
     @Before
     public void setup() throws IOException {
-        document = JsonPath.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/task/json/selector.json"), Charsets.UTF_8));
+        document = JsonPath.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/core/definition/json/selector.json"), Charsets.UTF_8));
     }
 
     @Test
