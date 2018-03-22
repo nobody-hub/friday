@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * Links that will be traced by the crawler
- *
+ * TODO: add JsonTypeInfo
  * @author Ryan
  */
 @Data
