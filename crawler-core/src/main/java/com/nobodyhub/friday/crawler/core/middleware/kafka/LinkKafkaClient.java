@@ -4,13 +4,9 @@ import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Link;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -18,18 +14,7 @@ import java.util.Properties;
  *
  * @author Ryan
  */
-public class LinkKafkaClient {
-
-    /**
-     * the same reusable instance of {@link KafkaConsumer} by all threads
-     */
-    protected KafkaProducer<String, Link> producer;
-
-    /**
-     * Topic on which the client is working
-     * TODO: add topic info
-     */
-    protected final String topic = "TOPIC";
+public class LinkKafkaClient extends KafkaClient<Link> {
 
     public LinkKafkaClient() {
         Properties props = new Properties();
@@ -37,17 +22,7 @@ public class LinkKafkaClient {
         producer = new KafkaProducer<>(props);
     }
 
-    public void send(List<Link> links) {
-        for (Link link : links) {
-            //TODO: figure out a meaningful key
-            ProducerRecord<String, Link> record = new ProducerRecord<>(topic, link);
-            producer.send(record, new ProducerCallback());
-        }
-    }
-
-    /**
-     * @return a new {@link KafkaConsumer} instance on each call
-     */
+    @Override
     public KafkaConsumer<String, Link> createConsumer() {
         Properties props = new Properties();
         //broker address, TODO: read from parameter
@@ -69,15 +44,5 @@ public class LinkKafkaClient {
         KafkaConsumer<String, Link> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Lists.newArrayList(topic));
         return consumer;
-    }
-
-    private class ProducerCallback implements Callback {
-        @Override
-        public void onCompletion(RecordMetadata metadata, Exception exception) {
-            //TODO: handle  callback
-            if (exception != null) {
-                exception.printStackTrace();
-            }
-        }
     }
 }
