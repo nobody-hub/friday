@@ -11,12 +11,12 @@ import java.io.IOException;
  * @author Ryan
  */
 public class HtmlLinkContent extends LinkContent<Document> {
-    public HtmlLinkContent(Link link, Document document, Connection.Response response) {
-        super(link, document, response);
+    public HtmlLinkContent(Link link, Connection.Response response) throws IOException {
+        super(link, response);
     }
 
     @Override
-    public Document getDocument() throws IOException {
+    protected Document parseContent(Connection.Response response) throws IOException {
         return response.parse();
     }
 }

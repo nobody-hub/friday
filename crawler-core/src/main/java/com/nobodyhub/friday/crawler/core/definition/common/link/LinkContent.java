@@ -1,6 +1,6 @@
 package com.nobodyhub.friday.crawler.core.definition.common.link;
 
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import org.jsoup.Connection;
 
 import java.io.IOException;
@@ -10,17 +10,22 @@ import java.io.IOException;
  *
  * @author Ryan
  */
-@RequiredArgsConstructor
+@Getter
 public abstract class LinkContent<DOC> {
     protected final Link link;
     protected final DOC document;
-    protected final Connection.Response response;
+
+    public LinkContent(Link link, Connection.Response response) throws IOException {
+        this.link = new Link(link.getUrl(), link.getRequest().copyAndUpdate(response));
+        this.document = parseContent(response);
+    }
 
     /**
-     * extrac the actual contents from {@link this#response}
+     * Parse target contents from Reponse
      *
+     * @param response
      * @return
      * @throws IOException
      */
-    public abstract DOC getDocument() throws IOException;
+    protected abstract DOC parseContent(Connection.Response response) throws IOException;
 }

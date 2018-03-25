@@ -12,12 +12,13 @@ import java.io.IOException;
  * @author Ryan
  */
 public class JsonLinkContent extends LinkContent<ReadContext> {
-    public JsonLinkContent(Link link, ReadContext document, Connection.Response response) {
-        super(link, document, response);
+    public JsonLinkContent(Link link, Connection.Response response) throws IOException {
+        super(link, response);
     }
 
     @Override
-    public ReadContext getDocument() throws IOException {
+    protected ReadContext parseContent(Connection.Response response) throws IOException {
         return JsonPath.parse(response.body());
     }
+
 }
