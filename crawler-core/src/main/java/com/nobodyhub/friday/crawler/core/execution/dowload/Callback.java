@@ -1,4 +1,4 @@
-package com.nobodyhub.friday.crawler.core.dowload;
+package com.nobodyhub.friday.crawler.core.execution.dowload;
 
 import com.nobodyhub.friday.crawler.core.definition.common.link.LinkContent;
 
