@@ -8,7 +8,9 @@ import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemPattern;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Link;
+import com.nobodyhub.friday.crawler.core.definition.common.link.LinkContent;
 import com.nobodyhub.friday.crawler.core.definition.common.link.LinkPattern;
+import com.nobodyhub.friday.crawler.core.definition.common.link.Request;
 import com.nobodyhub.friday.crawler.core.definition.html.HtmlTask;
 import com.nobodyhub.friday.crawler.core.definition.json.JsonTask;
 import lombok.Data;
@@ -42,9 +44,9 @@ import java.util.concurrent.atomic.AtomicReference;
 @ToString
 @RequiredArgsConstructor
 public abstract class Task<
-        DOCUMENT,
-        SELECTOR extends ItemPattern<DOCUMENT>,
-        LINKPATTERN extends LinkPattern<DOCUMENT, ? extends SELECTOR>> {
+        LINKCONTENT extends LinkContent,
+        SELECTOR extends ItemPattern<LINKCONTENT>,
+        LINKPATTERN extends LinkPattern<LINKCONTENT, ? extends SELECTOR>> {
     /**
      * Type of task
      */
@@ -95,21 +97,23 @@ public abstract class Task<
     /**
      * Get futher links
      *
-     * @param document
+     * @param content
      * @return
      */
-    public List<Link> parseLink(Link link, DOCUMENT document, Connection.Response response) {
+    public List<Link> parseLink(LINKCONTENT content) {
+        Link link = content.getLink();
+
         //parse <a>
         List<String> urls = Lists.newArrayList();
         String baseUrl = link.getUrl();
         for (LINKPATTERN pattern : links) {
             if (pattern.matches(baseUrl)) {
-                urls.addAll(pattern.parse(link.getUrl(), document));
+                urls.addAll(pattern.parse(link.getUrl(), content));
             }
         }
         List<Link> newLinks = Lists.newArrayList();
         for (String url : urls) {
-            newLinks.add(new Link(url, link.getRequest().update(response)));
+            newLinks.add(new Link(url, new Request(link.getRequest())));
         }
         return newLinks;
     }
@@ -117,14 +121,15 @@ public abstract class Task<
     /**
      * Get contents of selectors
      *
-     * @param document
+     * @param content
      * @return
      */
-    public List<Item> parseContent(String url, DOCUMENT document) {
+    public List<Item> parseContent(LINKCONTENT content) {
+        String url = content.getLink().getUrl();
         List<Item> values = Lists.newArrayList();
         for (SELECTOR pattern : selectors) {
             if (pattern.matches(url)) {
-                values.addAll(pattern.select(url, document));
+                values.addAll(pattern.select(url, content));
             }
         }
         return values;
@@ -159,37 +164,12 @@ public abstract class Task<
      * @return
      * @throws IOException
      */
-    public Connection.Response connect(Link link) throws IOException {
+    public abstract LINKCONTENT connect(Link link) throws IOException;
+
+    protected Connection.Response request(Link link) throws IOException {
         return link.getRequest().execute(link.getUrl());
     }
 
-    /**
-     * Execute task:
-     * 1. query contents from {@code startLink}
-     * 2. parse the new {@link Link}s into {@code links}
-     * 3. parse target {@link Item}s into {@code items}
-     *
-     * @param startLink
-     * @param links
-     * @param items
-     */
-    public void execute(Link startLink, List<Link> links, List<Item> items) throws IOException {
-        Connection.Response response = connect(startLink);
-        DOCUMENT document = extract(response);
-        links.addAll(parseLink(startLink, document, response));
-        items.addAll(parseContent(startLink.getUrl(), document));
-        increaseCount();
-    }
-
-
-    /**
-     * Extract {@link DOCUMENT} from {@code response}
-     *
-     * @param response
-     * @return
-     * @throws IOException
-     */
-    public abstract DOCUMENT extract(Connection.Response response) throws IOException;
 
     protected void increaseCount() {
         this.limitCount.getAndAccumulate(BigInteger.ONE, (previous, toAdd) -> previous.add(toAdd));

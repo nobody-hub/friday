@@ -5,13 +5,12 @@ import com.nobodyhub.friday.crawler.core.definition.common.link.LinkPattern;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Request;
 import com.nobodyhub.friday.crawler.core.definition.html.selector.HtmlUrlItemPattern;
 import lombok.EqualsAndHashCode;
-import org.jsoup.nodes.Document;
 
 /**
  * @author Ryan
  */
 @EqualsAndHashCode(callSuper = true)
-public class HtmlLinkPattern extends LinkPattern<Document, HtmlUrlItemPattern> {
+public class HtmlLinkPattern extends LinkPattern<HtmlLinkContent, HtmlUrlItemPattern> {
     public HtmlLinkPattern(
             @JsonProperty("urlPattern") String urlPattern,
             @JsonProperty("selector") HtmlUrlItemPattern selector,

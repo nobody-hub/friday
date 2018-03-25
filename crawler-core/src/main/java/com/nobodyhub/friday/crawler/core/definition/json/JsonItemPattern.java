@@ -3,7 +3,6 @@ package com.nobodyhub.friday.crawler.core.definition.json;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
-import com.jayway.jsonpath.ReadContext;
 import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemPattern;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemType;
@@ -33,7 +32,7 @@ import static com.nobodyhub.friday.crawler.core.definition.common.item.Item.JSON
         @JsonSubTypes.Type(value = JsonVideoItemPattern.class, name = "VIDEO")
 })
 @EqualsAndHashCode(callSuper = true)
-public abstract class JsonItemPattern extends ItemPattern<ReadContext> {
+public abstract class JsonItemPattern extends ItemPattern<JsonLinkContent> {
 
     public JsonItemPattern(ItemType type, String urlPattern, List<String> selectors) {
         super(type, urlPattern, selectors);
@@ -43,14 +42,14 @@ public abstract class JsonItemPattern extends ItemPattern<ReadContext> {
      * Prefix {@code $..} added to ensure the path will return a list
      *
      * @param url
-     * @param document
+     * @param content
      * @param selector
      * @return
      * @see <a href="https://github.com/json-path/JsonPath#what-is-returned-when">what-is-returned-when</a>
      */
     @Override
-    protected List<Item> select(String url, ReadContext document, String selector) {
-        List<String> values = document.read("$.." + selector);
+    protected List<Item> select(String url, JsonLinkContent content, String selector) {
+        List<String> values = content.getDocument().read("$.." + selector);
         List<Item> results = Lists.newArrayList();
         int i = 0;
         for (String value : values) {

@@ -6,7 +6,6 @@ import com.nobodyhub.friday.crawler.core.definition.common.item.ItemPattern;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemType;
 import com.nobodyhub.friday.crawler.core.definition.html.selector.*;
 import lombok.EqualsAndHashCode;
-import org.jsoup.nodes.Document;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = HtmlUrlItemPattern.class, name = "URL")
 })
 @EqualsAndHashCode(callSuper = true)
-public abstract class HtmlItemPattern extends ItemPattern<Document> {
+public abstract class HtmlItemPattern extends ItemPattern<HtmlLinkContent> {
     public HtmlItemPattern(ItemType type, String urlPattern, List<String> selectors) {
         super(type, urlPattern, selectors);
     }

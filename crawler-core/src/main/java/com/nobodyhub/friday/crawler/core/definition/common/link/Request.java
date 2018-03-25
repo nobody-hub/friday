@@ -114,7 +114,7 @@ public class Request {
      * @param response
      * @return a new updated Request instance using the {@code response} from last request
      */
-    public Request update(Connection.Response response) {
+    public Request copyAndUpdate(Connection.Response response) {
         Request request = new Request(this);
         request.addHeader(response.headers());
         request.updateCookies(response.cookies());

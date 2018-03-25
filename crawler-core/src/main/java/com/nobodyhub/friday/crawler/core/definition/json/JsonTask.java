@@ -3,14 +3,13 @@ package com.nobodyhub.friday.crawler.core.definition.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.ReadContext;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Link;
 import com.nobodyhub.friday.crawler.core.definition.common.task.Task;
 import com.nobodyhub.friday.crawler.core.definition.common.task.TaskType;
 import lombok.EqualsAndHashCode;
 import org.jsoup.Connection;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 public class JsonTask
-        extends Task<ReadContext, JsonItemPattern, JsonLinkPattern> {
+        extends Task<JsonLinkContent, JsonItemPattern, JsonLinkPattern> {
     public JsonTask(
             String name,
             String description,
@@ -53,8 +52,10 @@ public class JsonTask
                 jsonSelectors);
     }
 
+
     @Override
-    public ReadContext extract(Connection.Response response) {
-        return JsonPath.parse(response.body());
+    public JsonLinkContent connect(Link link) throws IOException {
+        Connection.Response response = request(link);
+        return new JsonLinkContent(link, response);
     }
 }

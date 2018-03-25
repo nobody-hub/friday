@@ -1,7 +1,6 @@
 package com.nobodyhub.friday.crawler.core.definition.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jayway.jsonpath.ReadContext;
 import com.nobodyhub.friday.crawler.core.definition.common.link.LinkPattern;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Request;
 import com.nobodyhub.friday.crawler.core.definition.json.selector.JsonAttrItemPattern;
@@ -13,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * @author Ryan
  */
 @EqualsAndHashCode(callSuper = true)
-public class JsonLinkPattern extends LinkPattern<ReadContext, JsonAttrItemPattern> {
+public class JsonLinkPattern extends LinkPattern<JsonLinkContent, JsonAttrItemPattern> {
     public JsonLinkPattern(
             @JsonProperty("urlPattern") String urlPattern,
             @JsonProperty("selector") JsonAttrItemPattern selector,
