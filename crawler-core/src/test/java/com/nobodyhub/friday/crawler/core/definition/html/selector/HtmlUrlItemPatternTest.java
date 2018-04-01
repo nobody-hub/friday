@@ -17,7 +17,7 @@ public class HtmlUrlItemPatternTest extends HtmlItemPatternTest {
     @Test
     public void testSelect() {
         this.selector = new HtmlUrlItemPattern("urlPattern", Lists.newArrayList("a.mnav"));
-        List<Item> contents = this.selector.select("http://www.baidu.com/", document);
+        List<Item> contents = this.selector.select("http://www.baidu.com/", content);
         assertEquals(6, contents.size());
         List<String> values = convertToAttrList(contents, HTML_HREF);
         assertEquals(true, values.contains("http://news.baidu.com"));

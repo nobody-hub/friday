@@ -8,6 +8,9 @@ import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -20,11 +23,17 @@ import java.util.List;
 public abstract class HtmlItemPatternTest {
     protected Document document;
     protected HtmlItemPattern selector;
+    @Mock
+    protected HtmlLinkContent content;
 
     @Before
     public void setup() throws URISyntaxException, IOException {
+        MockitoAnnotations.initMocks(this);
+
         document = Jsoup.parse(Resources.toString(getClass().getClassLoader().getResource("com/nobodyhub/friday/crawler/core/definition/html/selector.html"), Charsets.UTF_8));
         document.setBaseUri("http://nobodyhub.com/selector/test");
+
+        Mockito.when(content.getDocument()).thenReturn(document);
     }
 
     protected List<String> convertToAttrList(List<Item> results, final String attr) {

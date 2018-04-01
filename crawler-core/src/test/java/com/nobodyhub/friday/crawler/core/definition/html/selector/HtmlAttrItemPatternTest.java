@@ -20,7 +20,7 @@ public class HtmlAttrItemPatternTest extends HtmlItemPatternTest {
     public void testSelectWithAttr() {
         selector = new HtmlAttrItemPattern("urlPattern", Lists.newArrayList("a.mnav"));
         ((HtmlAttrItemPattern) selector).addAttribute("name");
-        List<Item> contents = selector.select("http://www.baidu.com", document);
+        List<Item> contents = selector.select("http://www.baidu.com", content);
         assertEquals(6, contents.size());
         List<String> values = convertToAttrList(contents, "name");
         assertEquals("a.mnav", contents.get(0).getSelector());
@@ -37,7 +37,7 @@ public class HtmlAttrItemPatternTest extends HtmlItemPatternTest {
     @Test
     public void testSelectWithoutAttr() {
         selector = new HtmlAttrItemPattern("urlPattern", Lists.newArrayList("a.mnav"));
-        List<Item> contents = selector.select("http://www.baidu.com", document);
+        List<Item> contents = selector.select("http://www.baidu.com", content);
         assertEquals(6, contents.size());
         List<String> values = convertToAttrList(contents, HTML_TEXT);
         assertEquals("a.mnav", contents.get(0).getSelector());

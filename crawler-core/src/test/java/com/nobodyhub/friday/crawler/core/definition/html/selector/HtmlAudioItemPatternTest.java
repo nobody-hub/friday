@@ -17,7 +17,7 @@ public class HtmlAudioItemPatternTest extends HtmlItemPatternTest {
     @Test
     public void testSelect() {
         this.selector = new HtmlAudioItemPattern("urlPattern", Lists.newArrayList("audio.selected"));
-        List<Item> contents = this.selector.select("http://nobodyhub.com/", document);
+        List<Item> contents = this.selector.select("http://nobodyhub.com/", content);
         assertEquals(2, contents.size());
         List<String> values = convertToAttrList(contents, HTML_SRC);
         assertEquals(true, values.contains("http://nobodyhub.com/selector/horse.mp3"));

@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemType;
 import com.nobodyhub.friday.crawler.core.definition.html.HtmlItemPattern;
+import com.nobodyhub.friday.crawler.core.definition.html.HtmlLinkContent;
 import lombok.EqualsAndHashCode;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -34,9 +34,9 @@ public class HtmlAttrItemPattern extends HtmlItemPattern {
     }
 
     @Override
-    protected List<Item> select(String url, Document document, String selector) {
+    protected List<Item> select(String url, HtmlLinkContent document, String selector) {
         List<Item> results = Lists.newArrayList();
-        Elements elements = document.select(selector);
+        Elements elements = document.getDocument().select(selector);
         for (Element element : elements) {
             Item result = new Item(this.type, url, selector);
             if (this.attributes.isEmpty()) {

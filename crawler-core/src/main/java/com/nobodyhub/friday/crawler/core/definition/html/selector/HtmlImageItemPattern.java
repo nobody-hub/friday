@@ -5,9 +5,9 @@ import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.core.definition.common.item.ItemType;
 import com.nobodyhub.friday.crawler.core.definition.html.HtmlItemPattern;
+import com.nobodyhub.friday.crawler.core.definition.html.HtmlLinkContent;
 import lombok.EqualsAndHashCode;
 import org.jsoup.helper.StringUtil;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -35,9 +35,9 @@ public class HtmlImageItemPattern extends HtmlItemPattern {
      * @see org.jsoup.nodes.Node#absUrl(String)
      */
     @Override
-    protected List<Item> select(String url, Document document, String selector) {
+    protected List<Item> select(String url, HtmlLinkContent document, String selector) {
         List<Item> results = Lists.newArrayList();
-        Elements elements = document.select(selector);
+        Elements elements = document.getDocument().select(selector);
         for (Element element : elements) {
             Item result = new Item(this.type, url, selector);
             result.addAttr(HTML_SRC, StringUtil.resolve(element.baseUri(), element.attr(HTML_SRC)));

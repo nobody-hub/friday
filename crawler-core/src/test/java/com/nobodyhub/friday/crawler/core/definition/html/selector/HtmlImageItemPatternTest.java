@@ -17,7 +17,7 @@ public class HtmlImageItemPatternTest extends HtmlItemPatternTest {
     @Test
     public void testSelect() {
         this.selector = new HtmlImageItemPattern("urlPattern", Lists.newArrayList("img[hidefocus=true]"));
-        List<Item> contents = this.selector.select("http://www.baidu.com/", document);
+        List<Item> contents = this.selector.select("http://www.baidu.com/", content);
         assertEquals(1, contents.size());
         List<String> values = convertToAttrList(contents, HTML_SRC);
         assertEquals(true, values.contains("http://www.baidu.com/img/bd_logo1.png"));
