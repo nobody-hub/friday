@@ -5,6 +5,7 @@ import com.nobodyhub.friday.crawler.core.definition.common.link.Link;
 import com.nobodyhub.friday.crawler.core.definition.common.task.Task;
 import com.nobodyhub.friday.crawler.core.execution.common.CrawlerThreadFactory;
 import com.nobodyhub.friday.crawler.core.execution.partition.TaskExecutionPartitionPolity;
+import com.nobodyhub.friday.crawler.core.middleware.kafka.AdminKafkaClient;
 import lombok.Getter;
 
 import java.math.BigInteger;
@@ -59,6 +60,7 @@ public class TaskExecutor {
                     new TaskExecutor(task, metadata, limit)
             );
         }
+        AdminKafkaClient.getInstance().createTopics(metadata);
         return executions;
     }
 

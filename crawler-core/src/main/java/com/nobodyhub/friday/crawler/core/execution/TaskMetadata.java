@@ -1,5 +1,6 @@
 package com.nobodyhub.friday.crawler.core.execution;
 
+import com.nobodyhub.friday.crawler.core.concurrent.Immutable;
 import com.nobodyhub.friday.crawler.core.definition.common.item.Item;
 import com.nobodyhub.friday.crawler.core.definition.common.link.Link;
 import com.nobodyhub.friday.crawler.core.definition.common.link.LinkContent;
@@ -14,6 +15,7 @@ import java.util.UUID;
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Immutable
 public final class TaskMetadata {
     /**
      * the unique identifire of task,
