@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * TODO: change to singleton and make it thread safe
  *
  * @author Ryan
  */
@@ -30,7 +29,7 @@ public class AdminKafkaClient {
         adminClient = AdminClient.create(props);
     }
 
-    public void listTopics() {
+    public synchronized void listTopics() {
         adminClient.listTopics();
     }
 
@@ -43,7 +42,7 @@ public class AdminKafkaClient {
     }
 
 
-    public void createTopics(String... topics) {
+    public synchronized void createTopics(String... topics) {
         List<NewTopic> newTopics = Lists.newArrayList();
         for (String topic : topics) {
             newTopics.add(new NewTopic(topic, 1, (short) 1));
@@ -51,7 +50,7 @@ public class AdminKafkaClient {
         adminClient.createTopics(newTopics);
     }
 
-    public void deleteTopics(String... topics) {
+    public synchronized void deleteTopics(String... topics) {
         adminClient.deleteTopics(Lists.newArrayList(topics));
     }
 }
