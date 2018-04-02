@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public final class TaskExecutionMetadata {
+public final class TaskMetadata {
     /**
      * the unique identifire of task,
      * used as Group Id for Kafka consumer
@@ -33,9 +33,9 @@ public final class TaskExecutionMetadata {
      */
     private final String itemTopic;
 
-    public static TaskExecutionMetadata generate() {
+    public static TaskMetadata generate() {
         String uuid = UUID.randomUUID().toString();
-        return new TaskExecutionMetadata(
+        return new TaskMetadata(
                 "task-" + uuid,
                 "link-" + uuid,
                 "content-" + uuid,

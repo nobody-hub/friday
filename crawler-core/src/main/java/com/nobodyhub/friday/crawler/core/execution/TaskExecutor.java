@@ -37,21 +37,21 @@ public class TaskExecutor {
     /**
      * metadata of task execution
      */
-    protected final TaskExecutionMetadata metadata;
+    protected final TaskMetadata metadata;
     /**
      * the limits of number of {@link Link}s to be processed
      * calculated from {@link Task#limit} according to
      */
     protected final AtomicReference<BigInteger> limits;
 
-    private TaskExecutor(Task task, TaskExecutionMetadata metadata, BigInteger limits) {
+    private TaskExecutor(Task task, TaskMetadata metadata, BigInteger limits) {
         this.task = task;
         this.metadata = metadata;
         this.limits = new AtomicReference<>(limits);
     }
 
     public static List<TaskExecutor> build(Task task, TaskExecutionPartitionPolity policy) {
-        TaskExecutionMetadata metadata = TaskExecutionMetadata.generate();
+        TaskMetadata metadata = TaskMetadata.generate();
         List<TaskExecutor> executions = Lists.newArrayList();
         List<BigInteger> limits = policy.partition(task.getLimit());
         for (BigInteger limit : limits) {
