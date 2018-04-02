@@ -2,13 +2,13 @@ package com.nobodyhub.friday.crawler.core.execution.partition;
 
 import com.google.common.collect.Lists;
 import com.nobodyhub.friday.crawler.core.definition.common.task.Task;
-import com.nobodyhub.friday.crawler.core.execution.TaskExecution;
+import com.nobodyhub.friday.crawler.core.execution.TaskExecutor;
 
 import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Policy to distribute the {@link Task#limit} to each {@link TaskExecution}
+ * Policy to distribute the {@link Task#limit} to each {@link TaskExecutor}
  *
  * @author Ryan
  */

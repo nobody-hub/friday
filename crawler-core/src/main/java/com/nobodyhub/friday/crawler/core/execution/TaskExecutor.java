@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Ryan
  */
 @Getter
-public class TaskExecution {
+public class TaskExecutor {
 
     private static final int MAX_THREAD = Runtime.getRuntime().availableProcessors();
 
@@ -44,19 +44,19 @@ public class TaskExecution {
      */
     protected final AtomicReference<BigInteger> limits;
 
-    private TaskExecution(Task task, TaskExecutionMetadata metadata, BigInteger limits) {
+    private TaskExecutor(Task task, TaskExecutionMetadata metadata, BigInteger limits) {
         this.task = task;
         this.metadata = metadata;
         this.limits = new AtomicReference<>(limits);
     }
 
-    public static List<TaskExecution> build(Task task, TaskExecutionPartitionPolity policy) {
+    public static List<TaskExecutor> build(Task task, TaskExecutionPartitionPolity policy) {
         TaskExecutionMetadata metadata = TaskExecutionMetadata.generate();
-        List<TaskExecution> executions = Lists.newArrayList();
+        List<TaskExecutor> executions = Lists.newArrayList();
         List<BigInteger> limits = policy.partition(task.getLimit());
         for (BigInteger limit : limits) {
             executions.add(
-                    new TaskExecution(task, metadata, limit)
+                    new TaskExecutor(task, metadata, limit)
             );
         }
         return executions;
